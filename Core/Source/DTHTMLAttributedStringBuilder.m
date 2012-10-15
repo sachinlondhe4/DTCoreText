@@ -432,6 +432,22 @@
 	
 	[_tagStartHandlers setObject:[aBlock copy] forKey:@"a"];
 	
+	void (^entityBlock)(void) = ^
+	{
+		NSLog(@"currentTag.attributes %@", currentTag.attributes);
+		NSString *guid = [currentTag attributeForKey:@"guid"];
+		currentTag.linkGUID = guid;
+		currentTag.underlineStyle = kCTUnderlinePatternDot | kCTUnderlineStyleDouble;
+
+	//	currentTag.textColor = [DTColor orangeColor];
+	//	currentTag.backgroundColor = [DTColor orangeColor];
+		
+		currentTag.isColorInherited = NO;
+	};
+	
+	[_tagStartHandlers setObject:[entityBlock copy] forKey:@"entity"];
+
+	
 	
 	void (^liBlock)(void) = ^ 
 	{
@@ -690,7 +706,7 @@
 	}
 
 	_tagEndHandlers = [[NSMutableDictionary alloc] init];
-	
+
 	void (^bodyBlock)(void) = ^ 
 	{
 		// if the last child was a block we need an extra \n

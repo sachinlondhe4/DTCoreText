@@ -31,6 +31,21 @@
 	return self;
 }
 
+//- (id)initWithCoder:(NSCoder *)decoder
+//{
+//	self = [super initWithCoder:decoder];
+//	
+//	if (self)
+//	{
+//		[self setup];
+//		[self layoutSubviews];
+//
+//	}
+//	
+//	return self;
+//}
+
+
 - (void)dealloc 
 {
 	contentView.delegate = nil;
@@ -55,6 +70,7 @@
 // default
 - (void)setup
 {
+	self.delegate = self;
 	if (!self.backgroundColor)
 	{
 		self.backgroundColor = [DTColor whiteColor];
@@ -103,6 +119,7 @@
 		[self setContentOffset:CGPointMake(0, scrollPos) animated:animated];
 	}
 }
+
 
 #pragma mark Notifications
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -237,7 +254,7 @@
 	return contentView.delegate;
 }
 
-@synthesize attributedString;
+//@synthesize attributedString;
 @synthesize contentView;
 @synthesize textDelegate;
 

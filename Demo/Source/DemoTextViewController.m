@@ -6,6 +6,7 @@
 //  Copyright 2011 Drobnik.com. All rights reserved.
 //
 
+
 #import "DemoTextViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import <MediaPlayer/MediaPlayer.h>
@@ -37,13 +38,13 @@
 		self.navigationItem.titleView = _segmentedControl;	
 		
 		// toolbar
-#if 0 // DTWebArchive moved to separate project late 2011
-		UIBarButtonItem *spacer = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
-		UIBarButtonItem *paste = [[[UIBarButtonItem alloc] initWithTitle:@"Paste" style:UIBarButtonItemStyleBordered target:self action:@selector(paste:)] autorelease];
-		UIBarButtonItem *copy = [[[UIBarButtonItem alloc] initWithTitle:@"Copy" style:UIBarButtonItemStyleBordered target:self action:@selector(copy:)] autorelease];
+#if 1// DTWebArchive moved to separate project late 2011
+		UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+		UIBarButtonItem *paste = [[UIBarButtonItem alloc] initWithTitle:@"Paste" style:UIBarButtonItemStyleBordered target:self action:@selector(paste:)];
+		UIBarButtonItem *copy = [[UIBarButtonItem alloc] initWithTitle:@"Copy" style:UIBarButtonItemStyleBordered target:self action:@selector(copy:)];
 #endif		
 		UIBarButtonItem *debug = [[UIBarButtonItem alloc] initWithTitle:@"Debug Frames" style:UIBarButtonItemStyleBordered target:self action:@selector(debugButton:)];
-		NSArray *toolbarItems = [NSArray arrayWithObjects:/*paste, copy, spacer, */debug, nil];
+		NSArray *toolbarItems = [NSArray arrayWithObjects:/*paste, copy, */ spacer, debug, nil];
 		[self setToolbarItems:toolbarItems];
 	}
 	return self;

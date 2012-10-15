@@ -42,6 +42,7 @@ typedef enum
 @property (nonatomic, copy) DTCoreTextParagraphStyle *paragraphStyle;
 @property (nonatomic, strong) DTTextAttachment *textAttachment;
 @property (nonatomic, copy) NSURL *link;
+@property (nonatomic, copy) NSString *linkGUID;
 @property (nonatomic, copy) NSString *anchorName;
 @property (nonatomic, strong) DTColor *textColor;
 @property (nonatomic, strong) DTColor *backgroundColor;

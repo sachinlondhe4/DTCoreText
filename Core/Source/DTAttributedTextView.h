@@ -10,7 +10,7 @@
 
 @class DTAttributedTextView;
 
-@interface DTAttributedTextView : UIScrollView
+@interface DTAttributedTextView : UIScrollView 
 {
 	DTAttributedTextContentView *contentView;
 	UIView *backgroundView;

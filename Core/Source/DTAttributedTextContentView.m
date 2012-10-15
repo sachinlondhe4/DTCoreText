@@ -210,9 +210,10 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 					
 					// if there is no attachment then the effectiveRangeOfAttachment contains the range until the next attachment
 					NSURL *linkURL = [layoutString attribute:DTLinkAttribute atIndex:runRange.location longestEffectiveRange:&effectiveRangeOfLink inRange:effectiveRangeOfAttachment];
+					NSURL *linkGUID = [layoutString attribute:DTGUIDAttribute atIndex:runRange.location longestEffectiveRange:&effectiveRangeOfLink inRange:effectiveRangeOfAttachment];
 					
 					// avoid chaining together glyph runs for an attachment
-					if (linkURL && !attachment)
+					if (linkGUID && !attachment)
 					{
 						// compute bounding frame over potentially multiple (chinese) glyphs
 						skipRunsBeforeLocation = effectiveRangeOfLink.location+effectiveRangeOfLink.length;
@@ -284,6 +285,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 								[existingAttachmentView setNeedsDisplay];
 								
 								linkURL = nil; // prevent adding link button on top of image view
+								linkGUID = nil;
 							}
 							else
 							{
@@ -312,6 +314,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 										[self.customViewsForAttachmentsIndex setObject:newCustomAttachmentView forKey:indexKey];
 										
 										linkURL = nil; // prevent adding link button on top of image view
+										linkGUID = nil;
 									}
 								}
 							}
@@ -319,7 +322,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 					}
 					
 					
-					if (linkURL && (_delegateFlags.delegateSupportsCustomViewsForLinks || _delegateFlags.delegateSupportsGenericCustomViews))
+					if (linkGUID && (_delegateFlags.delegateSupportsCustomViewsForLinks || _delegateFlags.delegateSupportsGenericCustomViews))
 					{
 						UIView *existingLinkView = [self.customViewsForLinksIndex objectForKey:indexKey];
 						

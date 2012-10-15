@@ -13,7 +13,6 @@
 
 @property (nonatomic, strong) NSMutableDictionary *fontCache;
 @property (nonatomic, strong) NSMutableArray *children;
-@property (nonatomic, strong) NSString *linkGUID;
 
 - (DTCSSListStyle *)calculatedListStyle;
 
@@ -148,6 +147,10 @@
 	{
 		[tmpDict setObject:_link forKey:DTLinkAttribute];
 		
+	}
+	
+	if (_linkGUID)
+	{
 		// add a GUID to group multiple glyph runs belonging to same link
 		[tmpDict setObject:_linkGUID forKey:DTGUIDAttribute];
 	}
