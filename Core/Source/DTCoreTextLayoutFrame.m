@@ -14,11 +14,16 @@
 static BOOL _DTCoreTextLayoutFramesShouldDrawDebugFrames = NO;
 
 
+#define SYNCHRONIZE_START(lock) /* NSLog(@"LOCK: FUNC=%s Line=%d", __func__, __LINE__), */dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);
+#define SYNCHRONIZE_END(lock) dispatch_semaphore_signal(lock) /*, NSLog(@"UN-LOCK")*/;
+
 // two correction methods used by the deprecated way of layouting to work around Core Text bugs
 @interface DTCoreTextLayoutFrame ()
 
 - (void)_correctAttachmentHeights;
 - (void)_correctLineOrigins;
+@property (nonatomic, assign) dispatch_semaphore_t selfLock;
+
 
 @end
 
@@ -35,12 +40,15 @@ static BOOL _DTCoreTextLayoutFramesShouldDrawDebugFrames = NO;
 	DTCoreTextLayoutFrameTextBlockHandler _textBlockHandler;
 }
 
+
 // makes a frame for a specific part of the attributed string of the layouter
 - (id)initWithFrame:(CGRect)frame layouter:(DTCoreTextLayouter *)layouter range:(NSRange)range
 {
 	self = [super init];
 	if (self)
 	{
+		_selfLock = dispatch_semaphore_create(1);
+
 		_frame = frame;
 		
 		_attributedStringFragment = [layouter.attributedString mutableCopy];
@@ -89,8 +97,14 @@ static BOOL _DTCoreTextLayoutFramesShouldDrawDebugFrames = NO;
 	return [self initWithFrame:frame layouter:layouter range:NSMakeRange(0, 0)];
 }
 
+
+
 - (void)dealloc
 {
+	
+	SYNCHRONIZE_START(_selfLock)	// just to be sure
+		
+
 	if (_textFrame)
 	{
 		CFRelease(_textFrame);
@@ -100,6 +114,11 @@ static BOOL _DTCoreTextLayoutFramesShouldDrawDebugFrames = NO;
 	{
 		CFRelease(_framesetter);
 	}
+	SYNCHRONIZE_END(_selfLock)
+	
+	dispatch_release(_selfLock);
+
+
 }
 
 - (NSString *)description
@@ -115,6 +134,7 @@ static BOOL _DTCoreTextLayoutFramesShouldDrawDebugFrames = NO;
 {
 	// framesetter keeps internal reference, no need to retain
 	CTTypesetterRef typesetter = CTFramesetterGetTypesetter(_framesetter);
+	
 	
 	NSMutableArray *typesetLines = [NSMutableArray array];
 	
@@ -524,16 +544,22 @@ static BOOL _DTCoreTextLayoutFramesShouldDrawDebugFrames = NO;
 
 - (void)_buildLines
 {
-	// only build lines if frame is legal
-	if (_frame.size.width<=0)
+	
+	SYNCHRONIZE_START(_selfLock)
 	{
-		return;
+		// only build lines if frame is legal
+		if (_frame.size.width<=0)
+		{
+			return;
+		}
+		
+		// note: building line by line with typesetter
+		[self _buildLinesWithTypesetter];
+		
+		//[self _buildLinesWithStandardFramesetter];
 	}
-	
-	// note: building line by line with typesetter
-	[self _buildLinesWithTypesetter];
-	
-	//[self _buildLinesWithStandardFramesetter];
+	SYNCHRONIZE_END(_selfLock)
+
 }
 
 - (NSArray *)lines
@@ -903,6 +929,8 @@ static BOOL _DTCoreTextLayoutFramesShouldDrawDebugFrames = NO;
 					CGContextSetFillColorWithColor(context, backgroundColor);
 					CGContextFillRect(context, runStrokeBounds);
 				}
+				
+				drawStrikeOut = YES;
 				
 				if (drawStrikeOut)
 				{
