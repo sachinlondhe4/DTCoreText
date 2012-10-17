@@ -70,7 +70,6 @@
 // default
 - (void)setup
 {
-	self.delegate = self;
 	if (!self.backgroundColor)
 	{
 		self.backgroundColor = [DTColor whiteColor];

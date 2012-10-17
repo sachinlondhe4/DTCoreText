@@ -930,8 +930,6 @@ static BOOL _DTCoreTextLayoutFramesShouldDrawDebugFrames = NO;
 					CGContextFillRect(context, runStrokeBounds);
 				}
 				
-				drawStrikeOut = YES;
-				
 				if (drawStrikeOut)
 				{
 					runStrokeBounds.origin.y = roundf(runStrokeBounds.origin.y + oneRun.frame.size.height/2.0f + 1)+0.5f;
