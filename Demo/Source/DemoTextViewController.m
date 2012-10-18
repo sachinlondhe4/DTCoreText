@@ -38,13 +38,10 @@
 		self.navigationItem.titleView = _segmentedControl;	
 		
 		// toolbar
-#if 1// DTWebArchive moved to separate project late 2011
+		// DTWebArchive moved to separate project late 2011
 		UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-		UIBarButtonItem *paste = [[UIBarButtonItem alloc] initWithTitle:@"Paste" style:UIBarButtonItemStyleBordered target:self action:@selector(paste:)];
-		UIBarButtonItem *copy = [[UIBarButtonItem alloc] initWithTitle:@"Copy" style:UIBarButtonItemStyleBordered target:self action:@selector(copy:)];
-#endif		
 		UIBarButtonItem *debug = [[UIBarButtonItem alloc] initWithTitle:@"Debug Frames" style:UIBarButtonItemStyleBordered target:self action:@selector(debugButton:)];
-		NSArray *toolbarItems = [NSArray arrayWithObjects:/*paste, copy, */ spacer, debug, nil];
+		NSArray *toolbarItems = [NSArray arrayWithObjects:spacer, debug, nil];
 		[self setToolbarItems:toolbarItems];
 	}
 	return self;
@@ -125,6 +122,12 @@
 	_textView.contentView.edgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
 	_textView.contentView.shouldDrawLinks = NO; // we draw them in DTLinkButton
 	_textView.attributedString = string;
+	self.attributedString = string;
+	
+	UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(scaleText:)];
+    [pinchGesture setDelegate:self];
+    [_textView addGestureRecognizer:pinchGesture];
+
 }
 
 
@@ -540,6 +543,60 @@
 	[_textView.contentView relayoutText];
 }
 
+#pragma mark -
+#pragma mark Gestures
+
+- (NSAttributedString*)attributedString :(NSAttributedString*)string withScale:(CGFloat)scale {
+    
+    NSMutableAttributedString *result = [[NSMutableAttributedString alloc] init];
+    [string enumerateAttributesInRange:NSMakeRange(0, [string length]) options:0 usingBlock:  ^(NSDictionary *attrs, NSRange range, BOOL *stop) {
+        NSString *subString = [[string string] substringWithRange:range];
+        
+        CTFontRef font = (__bridge CTFontRef)attrs[@"NSFont"];
+        
+        CGAffineTransform *matrix = nil;
+        CTFontDescriptorRef attributes = nil;
+        
+        CTFontRef newFont = CTFontCreateCopyWithAttributes(font, CTFontGetSize(font) * scale, matrix, attributes);
+        NSMutableDictionary *newAttrs = [attrs mutableCopy];
+        newAttrs[@"NSFont"] = (__bridge id)newFont;
+        
+        
+        [result appendAttributedString:[[NSAttributedString alloc] initWithString:subString attributes:newAttrs]];
+    }];
+    
+    return result;
+}
+
+- (void)scaleText:(UIPinchGestureRecognizer *)gestureRecognizer
+{
+    static BOOL setup = NO;
+    static CGRect origFrame;
+	
+    if (!setup) {
+        origFrame = _textView.frame;
+        setup = YES;
+    }
+    
+    CGFloat inScale = [gestureRecognizer scale];
+    CGFloat tmpScale = _scale * inScale;
+    
+    if (tmpScale < 0.5) tmpScale = 0.5;
+    if (tmpScale > 2.0) tmpScale = 2.0;
+    
+    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
+        
+		
+    } else if ([gestureRecognizer state] == UIGestureRecognizerStateChanged) {
+        
+        _textView.attributedString = [self attributedString:self.attributedString withScale:tmpScale];
+        
+    } else if ([gestureRecognizer state] == UIGestureRecognizerStateEnded) {
+        
+        _scale = tmpScale;
+    }
+}
+
 #pragma mark Properties
 
 - (NSMutableSet *)mediaPlayers
@@ -556,6 +613,7 @@
 @synthesize lastActionLink;
 @synthesize mediaPlayers;
 @synthesize baseURL;
+@synthesize attributedString;
 
 
 @end
