@@ -6,9 +6,12 @@
 //  Copyright 2011 Drobnik.com. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
+
 #import "DTAttributedTextContentView.h"
 #import "DTCoreText.h"
-#import <QuartzCore/QuartzCore.h>
+#import "DTCoreTextLayoutFrame.h"
+
 
 #if !__has_feature(objc_arc)
 #error THIS CODE MUST BE COMPILED WITH ARC ENABLED!
@@ -787,6 +790,62 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 	
 	return selfLock;
 }
+
+#pragma mark Touches
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	[super touchesBegan:touches withEvent:event];
+	UITouch *touch = [[touches allObjects] lastObject];
+	CGPoint touchPoint = [touch locationInView:self];
+	CGRect rect = CGRectMake(touchPoint.x, touchPoint.y, 0.0, 0.0);
+	NSArray *lines = [self.layoutFrame linesVisibleInRect:rect];
+	
+	
+	NSLog(@"touchesBegan %@", touch);
+	NSLog(@"lines %@", lines);
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	[super touchesMoved:touches withEvent:event];
+	NSLog(@"%@ touchesMoved %@", self, touches);
+
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	[super touchesEnded:touches withEvent:event];
+	NSLog(@"%@ touchesEnded %@", self, touches);
+
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	[super touchesCancelled:touches withEvent:event];
+	NSLog(@"%@ touchesCancelled %@", self, touches);
+
+}
+
+#pragma mark Motion
+
+
+- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+	NSLog(@"%@ motionBegan %d", self, motion);
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+	NSLog(@"%@ motionEnded %d", self, motion);
+}
+
+- (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+	NSLog(@"%@ motionCancelled %d", self, motion);
+}
+
 
 
 @synthesize layouter = _layouter;

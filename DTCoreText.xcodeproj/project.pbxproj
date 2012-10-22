@@ -389,6 +389,8 @@
 		A7F7EFC61573603100F5A4D0 /* DTImage+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = A7C5D01314D7E3BB00AF1D75 /* DTImage+HTML.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7F7EFC81573603100F5A4D0 /* DTCompatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = A7A672B91532F2D100920A18 /* DTCompatibility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE08BAB5148808B20054DC84 /* DTCoreTextFontOverrides.plist in Resources */ = {isa = PBXBuildFile; fileRef = A788CA2114863EF100E1AFD9 /* DTCoreTextFontOverrides.plist */; };
+		E25047C11635DF5400B68335 /* spec2.html in Resources */ = {isa = PBXBuildFile; fileRef = E25047C01635DF5400B68335 /* spec2.html */; };
+		E2CBB22E1635BC3400514902 /* spec.html in Resources */ = {isa = PBXBuildFile; fileRef = E2CBB22D1635BC3400514902 /* spec.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -702,6 +704,8 @@
 		A7F5672514D8506B00D1F167 /* NSAttributedString+SmallCaps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+SmallCaps.h"; sourceTree = "<group>"; };
 		A7F5672614D8506C00D1F167 /* NSAttributedString+SmallCaps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+SmallCaps.m"; sourceTree = "<group>"; };
 		A7F7EFCD1573603100F5A4D0 /* libDTCoreText_no_DTFoundation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDTCoreText_no_DTFoundation.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E25047C01635DF5400B68335 /* spec2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = spec2.html; sourceTree = "<group>"; };
+		E2CBB22D1635BC3400514902 /* spec.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = spec.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -762,8 +766,6 @@
 			files = (
 				A780D1071626A24F00D61229 /* libDTFoundation_Mac.a in Frameworks */,
 				A780D1031626A19B00D61229 /* libDTHTMLParser.a in Frameworks */,
-				A7F5671D14D8469000D1F167 /* Cocoa.framework in Frameworks */,
-				A7C1CC0F14D6CFD5008D6468 /* AppKit.framework in Frameworks */,
 				A7949A5914CC456000A8CCDE /* SenTestingKit.framework in Frameworks */,
 				A7C1CC0D14D6C4F2008D6468 /* libxml2.dylib in Frameworks */,
 			);
@@ -926,6 +928,8 @@
 		A788CA1A14863EF100E1AFD9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E25047C01635DF5400B68335 /* spec2.html */,
+				E2CBB22D1635BC3400514902 /* spec.html */,
 				A7D63CD91611B9AC00D4712A /* Default-568h@2x.png */,
 				A788CA2A14863EF100E1AFD9 /* Snippets.plist */,
 				A788CA1B14863EF100E1AFD9 /* Alignment.html */,
@@ -1506,6 +1510,8 @@
 				A72C15C71592FAF70064A67F /* CoreTextIssues.html in Resources */,
 				A73885A51606E9B2001D60C4 /* EmojiTest.html in Resources */,
 				A7D63CDA1611B9AC00D4712A /* Default-568h@2x.png in Resources */,
+				E2CBB22E1635BC3400514902 /* spec.html in Resources */,
+				E25047C11635DF5400B68335 /* spec2.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

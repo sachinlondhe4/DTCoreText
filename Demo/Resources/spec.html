@@ -1,0 +1,222 @@
+<article>
+<h1>Content specification</h1>
+<p>The content body for an article is a single string per article, and supports a subset of HTML. All unsupported HTML should be removed by the server, as should all CSS, javascript, etc.</p>
+<h2>Structure</h2>
+<p>The entire content body is wrapped inside “article” tags</p>
+<h2>Supported tags</h2>
+<p>The following tags are supported with the specified tag attributes.</p>
+
+<h2>font</h2>
+<p>
+The font tag is supported against a limited set of font faces.
+
+Supported optional attributes
+
+face="TBD"
+size="0|1|2|3"
+color="${standard-colors}"
+</p>
+<h1>Fonts</h1>
+<p>A font can either be specified directly via its face or via CSS styles. In CSS the font is never specified directly but instead via the font-family and various attributes.</p>
+<h2 style="color:red">Standard Fonts</h2>
+<p>The Standard font family to be used is 'Times New Roman', 12 px.</p>
+<p>These are the fonts where all 4 basic faces are available: Regular, Bold, Italic and Bold/Italic.</p>
+
+<h3>Arial</h3>
+<ul>
+	<li>Regular:<br /><font size="5" face="ArialMT">ArialMT</font></li>
+	<li>Bold:<br /><font size="5" face="Arial-BoldMT">Arial-BoldMT</font></li>
+	<li>Italic:<br /><font size="5" face="Arial-ItalicMT">Arial-ItalicMT</font></li>
+	<li>Bold/Italic:<br /><font size="5" face="Arial-BoldItalicMT">Arial-BoldItalicMT</font></li>
+</ul>
+<h3>Baskerville</h3>
+<ul>
+	<li>Regular:<br /><font size="5" face="Baskerville">Baskerville</font></li>
+	<li>Bold:<br /><font size="5" face="Baskerville-SemiBold">Baskerville-SemiBold</font></li>
+	<li>Italic:<br /><font size="5" face="Baskerville-Italic">Baskerville-Italic</font></li>
+	<li>Bold/Italic:<br /><font size="5" face="Baskerville-SemiBoldItalic">Baskerville-SemiBoldItalic</font></li>
+</ul>
+<h3>Cochin</h3>
+<ul>
+	<li>Regular:<br /><font size="5" face="Cochin">Cochin</font></li>
+	<li>Bold:<br /><font size="5" face="Cochin-Bold">Cochin-Bold</font></li>
+	<li>Italic:<br /><font size="5" face="Cochin-Italic">Cochin-Italic</font></li>
+	<li>Bold/Italic:<br /><font size="5" face="Cochin-BoldItalic">Cochin-BoldItalic</font></li>
+</ul>
+<h3>Courier</h3>
+<ul>
+	<li>Regular:<br /><font size="5" face="Courier">Courier</font></li>
+	<li>Bold:<br /><font size="5" face="Courier-Bold">Courier-Bold</font></li>
+	<li>Italic:<br /><font size="5" face="Courier-Oblique">Courier-Oblique</font></li>
+	<li>Bold/Italic:<br /><font size="5" face="Courier-BoldOblique">Courier-BoldOblique</font></li>
+</ul>
+<h3>Courier New</h3>
+<ul>
+	<li>Regular:<br /><font size="5" face="CourierNewPSMT">CourierNewPSMT</font></li>
+	<li>Bold:<br /><font size="5" face="CourierNewPS-BoldMT">CourierNewPS-BoldMT</font></li>
+	<li>Italic:<br /><font size="5" face="CourierNewPS-ItalicMT">CourierNewPS-ItalicMT</font></li>
+	<li>Bold/Italic:<br /><font size="5" face="CourierNewPS-BoldItalicMT">CourierNewPS-BoldItalicMT</font></li>
+</ul>
+<h3>Georgia</h3>
+<ul>
+	<li>Regular:<br /><font size="5" face="Georgia">Georgia</font></li>
+	<li>Bold:<br /><font size="5" face="Georgia-Bold">Georgia-Bold</font></li>
+	<li>Italic:<br /><font size="5" face="Georgia-Italic">Georgia-Italic</font></li>
+	<li>Bold/Italic:<br /><font size="5" face="Georgia-BoldItalic">Georgia-BoldItalic</font></li>
+</ul>
+<h3>Helvetica</h3>
+<ul>
+	<li>Regular:<br /><font size="5" face="Helvetica">Helvetica</font></li>
+	<li>Bold:<br /><font size="5" face="Helvetica-Bold">Helvetica-Bold</font></li>
+	<li>Italic:<br /><font size="5" face="Helvetica-Oblique">Helvetica-Oblique</font></li>
+	<li>Bold/Italic:<br /><font size="5" face="Helvetica-BoldOblique">Helvetica-BoldOblique</font></li>
+</ul>
+<h3>Helvetica Neue</h3>
+<ul>
+	<li>Regular:<br /><font size="5" face="HelveticaNeue" color="red">HelveticaNeue</font></li>
+	<li>Bold:<br /><font size="5" face="HelveticaNeue-Bold" color="green">HelveticaNeue-Bold</font></li>
+	<li>Italic:<br /><font size="5" face="HelveticaNeue-Italic" color="blue">HelveticaNeue-Italic</font></li>
+	<li>Bold/Italic:<br /><font size="5" face="HelveticaNeue-BoldItalic">HelveticaNeue-BoldItalic</font></li>
+</ul>
+<h3>Palatino</h3>
+<ul>
+	<li>Regular:<br /><font size="5" face="Palatino-Roman">Palatino-Roman</font></li>
+	<li>Bold:<br /><font size="5" face="Palatino-Bold">Palatino-Bold</font></li>
+	<li>Italic:<br /><font size="5" face="Palatino-Italic">Palatino-Italic</font></li>
+	<li>Bold/Italic:<br /><font size="5" face="Palatino-BoldItalic">Palatino-BoldItalic</font></li>
+</ul>
+<h3>Times New Roman</h3>
+<ul>
+	<li>Regular:<br /><font size="5" face="TimesNewRomanPSMT">TimesNewRomanPSMT</font></li>
+	<li>Bold:<br /><font size="5" face="TimesNewRomanPS-BoldMT">TimesNewRomanPS-BoldMT</font></li>
+	<li>Italic:<br /><font size="5" face="TimesNewRomanPS-ItalicMT">TimesNewRomanPS-ItalicMT</font></li>
+	<li>Bold/Italic:<br /><font size="5" face="TimesNewRomanPS-BoldItalicMT">TimesNewRomanPS-BoldItalicMT</font></li>
+</ul>
+<h3>Trebuchet MS</h3>
+<ul>
+	<li>Regular:<br /><font size="5" face="TrebuchetMS">TrebuchetMS</font></li>
+	<li>Bold:<br /><font size="5" face="TrebuchetMS-Bold">TrebuchetMS-Bold</font></li>
+	<li>Italic:<br /><font size="5" face="TrebuchetMS-Italic">TrebuchetMS-Italic</font></li>
+	<li>Bold/Italic:<br /><font size="5" face="Trebuchet-BoldItalic">Trebuchet-BoldItalic</font></li>
+</ul>
+<h3>Verdana</h3>
+<ul>
+	<li>Regular:<br /><font size="5" face="Verdana">Verdana</font></li>
+	<li>Bold:<br /><font size="5" face="Verdana-Bold">Verdana-Bold</font></li>
+	<li>Italic:<br /><font size="5" face="Verdana-Italic">Verdana-Italic</font></li>
+	<li>Bold/Italic:<br /><font size="5" face="Verdana-BoldItalic">Verdana-BoldItalic</font></li>
+</ul>
+<hr />
+<h2 style="color:red">Custom Fonts</h2>
+<p>Usage of custom fonts is supported. You have to register these in the info.plist.</p>
+<p>Note: For some fonts you might have to bundle the normal as well as the bold variant for CTFontDescriptor to find the normal font.</p>
+<p>Core Text automatically display Right-to-Left Text as such if only RTL characters are used
+<p>XB Niloofar:</p>
+<p dir="rtl" style="font-weight:normal;font-family:'XB Niloofar';font-size:24px">بِسْمِ اللّٰهِ</p>
+<p>American Typewriter:</p>
+<right><p style="font-family:'American Typewriter';font-size:20px">AmericanTypewriter</p></right>
+<p>American Typewriter Bold:</p>
+<right><p style="font-weight:bold;font-family:'American Typewriter';font-size:20px">AmericanTypewriter</p></right>
+
+<hr />
+<h2 style="color:red">Font Variants</h2>
+<p>The font variant 'Small Caps' is supported by synthesizing an attributed string that has the lower case characters in the same font as the upper case ones, but 30% smaller.</p>
+<p>Helvetica (synthesized):<br/><span style="font-family:'Helvetica';font-size:30px;font-variant:small-caps">The Quick Brown <b>Fox</b> Jumps ...</span></p>
+<p>HoeflerText (native, iPad only):<br/><span style="font-family:'Hoefler Text';font-size:30px;font-variant:small-caps">The Quick Brown <b>Fox</b> Jumps ...</span></p><p>Supported values for the style font-variant:</p>
+<ul><li>inherit</li><li>normal</li><li>small-caps</li></ul>
+
+
+
+<h2>anchor (a)</h2>
+<p>
+
+The anchor (link) is supported with the following options:
+target="${reverb}|${web}". This specifies that the href is a valid reverb GUID, and the app should open inside the native application or in an external browser.
+</p>
+
+<p>Follow <a target="web" href="http://twitter.com/cocoanetics">@cocoanetics web target</a> on Twitter</p>
+<p>Follow <a target="reverb" href="http://twitter.com/cocoanetics">@cocoanetics reverb target</a> on Twitter</p>
+<p>Follow <a href="http://www.wordnik.com">wordnik</a> on Twitter</p>
+
+
+<h2>entity</h2>
+
+
+<p>
+Mandatory attributes
+
+guid="Some_unique_identifier_for_concept"
+</p>
+
+<p>This is a test of the entity tags <entity guid="DEADBEEF">this is an entity</entity> that was an entity</p>
+
+
+<h2>img</h2>
+
+<p>
+Mandatory values
+
+src="${image-url}"
+Images MUST specify a size in pixels for the client to render correctly
+
+width="${width}px"
+height="${height}px"
+</p>
+
+<p><img src="http://www.wordnik.com/images/homepage_logo.png" width="20" height="20"></p>
+<p><img src="http://www.wordnik.com/images/homepage_logo.png" width="100" height="100"></p>
+<p><img src="http://lovetomorrowtoday.com/wp-content/uploads/2009/02/colon-slash-slash1.jpg" width="200" height="200"></p>
+<p><img src="http://lovetomorrowtoday.com/wp-content/uploads/2009/02/colon-slash-slash1.jpg" width="300" height="300"></p>
+
+
+<h2>Misc.</h2>
+
+
+<h3>linebreak</h3>
+
+<p>The <br/>following <br/>tags <br/>are <br/>supported<br/> with<br/> the specified <br/>tag attributes.</p>
+
+<h3>bold</h3>
+
+<p>this has <b>bold</b> text </p>
+
+<h3>italic</h3>
+
+<p>this has <i>italic</i> text </p>
+
+<h3>emphasis</h3>
+
+<p>this has <em>emphasis</em> text </p>
+
+
+<h3>underline</h3>
+
+<p>this has <u>underline</u> text </p>
+
+
+
+
+
+
+<h1>Sample Document</h1>
+
+<h2>Text Alignment</h2>
+<p>Supported are all text alignment options via CSS text-align or the center tag.</p>
+<p>text-align: left, right, center, justify, inherit</p>
+
+<h2>Examples</h2>
+
+<p style="text-align:right;">Right</p> <center>Center</center> <p style="text-align:left;">Left</p>
+
+<h2>Non-Justified</h2>
+<p>This is normal text, naturally aligned</p>
+<p>Proin lectus nisl, volutpat non aliquet id, suscipit sed est. Maecenas vitae metus eget nulla mattis bibendum a a dolor. Fusce vestibulum velit hendrerit nunc egestas non ullamcorper ipsum sagittis. Praesent dui sapien, egestas sed tincidunt vitae, posuere eu neque. Donec faucibus felis sed magna cursus in faucibus odio aliquam. Curabitur elit urna, ullamcorper ut placerat vitae, posuere sed nisl. Maecenas ac tellus nulla, a commodo purus. Suspendisse porta vulputate volutpat. Integer sodales turpis vitae ante sodales tempor. Cras iaculis accumsan ante, sed interdum sem faucibus vel. Aenean tincidunt eleifend elit at porta. Aenean sodales lacus quis lacus gravida consectetur. Sed at ligula ut diam porta auctor. Nunc libero mauris, feugiat id gravida sed, blandit non neque. Suspendisse ac mauris urna. Vivamus lacus ipsum, tincidunt nec laoreet quis, convallis id purus. Ut vehicula lobortis erat in viverra. Ut ut tellus eget ipsum malesuada dignissim. Donec quis dolor erat, id adipiscing ipsum. Donec vitae sagittis turpis.
+</p>
+
+<h2>Justified</h2>
+<p>Justified Text is ideal for articles and books because the left and right border appears visually the same</p>
+<span style="text-align:justify;">
+<p>Proin lectus nisl, volutpat non aliquet id, suscipit sed est. Maecenas vitae metus eget nulla mattis bibendum a a dolor. Fusce vestibulum velit hendrerit nunc egestas non ullamcorper ipsum sagittis. Praesent dui sapien, egestas sed tincidunt vitae, posuere eu neque. Donec faucibus felis sed magna cursus in faucibus odio aliquam. Curabitur elit urna, ullamcorper ut placerat vitae, posuere sed nisl. Maecenas ac tellus nulla, a commodo purus. Suspendisse porta vulputate volutpat. Integer sodales turpis vitae ante sodales tempor. Cras iaculis accumsan ante, sed interdum sem faucibus vel. Aenean tincidunt eleifend elit at porta. Aenean sodales lacus quis lacus gravida consectetur. Sed at ligula ut diam porta auctor. Nunc libero mauris, feugiat id gravida sed, blandit non neque. Suspendisse ac mauris urna. Vivamus lacus ipsum, tincidunt nec laoreet quis, convallis id purus. Ut vehicula lobortis erat in viverra. Ut ut tellus eget ipsum malesuada dignissim. Donec quis dolor erat, id adipiscing ipsum. Donec vitae sagittis turpis.
+</p>
+</span>
+</article>

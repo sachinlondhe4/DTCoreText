@@ -1,0 +1,319 @@
+<article>
+<p>Content specification</p>
+<p>The content body for an article is a single string per article, and supports a subset of HTML. All unsupported HTML should be removed by the server, as should all CSS, javascript, etc.</p>
+<p>Structure</p>
+<p>The entire content body is wrapped inside “article” tags</p>
+<p>Supported tags</p>
+<p>The following tags are supported with the specified tag attributes.</p>
+
+<p>font</p>
+<p>
+The font tag is supported against a limited set of font faces.
+
+Supported optional attributes
+
+face="TBD"
+size="0|1|2|3"
+color="${standard-colors}"
+</p>
+<p>Fonts</p>
+<p>A font can either be specified directly via its face or via CSS styles. In CSS the font is never specified directly but instead via the font-family and various attributes.</p>
+<p style="color:red">Standard Fonts</p>
+<p>The Standard font family to be used is 'Times New Roman', 12 px.</p>
+<p>These are the fonts where all 4 basic faces are available: Regular, Bold, Italic and Bold/Italic.</p>
+
+<p>Arial</p>
+<p>
+	<p>Regular:<br /><font size="5" face="ArialMT">ArialMT</font></p>
+	<p>Bold:<br /><font size="5" face="Arial-BoldMT">Arial-BoldMT</font></p>
+	<p>Italic:<br /><font size="5" face="Arial-ItalicMT">Arial-ItalicMT</font></p>
+	<p>Bold/Italic:<br /><font size="5" face="Arial-BoldItalicMT">Arial-BoldItalicMT</font></p>
+</p>
+<p>Baskerville</p>
+<p>
+	<p>Regular:<br /><font size="5" face="Baskerville">Baskerville</font></p>
+	<p>Bold:<br /><font size="5" face="Baskerville-SemiBold">Baskerville-SemiBold</font></p>
+	<p>Italic:<br /><font size="5" face="Baskerville-Italic">Baskerville-Italic</font></p>
+	<p>Bold/Italic:<br /><font size="5" face="Baskerville-SemiBoldItalic">Baskerville-SemiBoldItalic</font></p>
+</p>
+<p>Cochin</p>
+<p>
+	<p>Regular:<br /><font size="5" face="Cochin">Cochin</font></p>
+	<p>Bold:<br /><font size="5" face="Cochin-Bold">Cochin-Bold</font></p>
+	<p>Italic:<br /><font size="5" face="Cochin-Italic">Cochin-Italic</font></p>
+	<p>Bold/Italic:<br /><font size="5" face="Cochin-BoldItalic">Cochin-BoldItalic</font></p>
+</p>
+<p>Courier</p>
+<p>
+	<p>Regular:<br /><font size="5" face="Courier">Courier</font></p>
+	<p>Bold:<br /><font size="5" face="Courier-Bold">Courier-Bold</font></p>
+	<p>Italic:<br /><font size="5" face="Courier-Oblique">Courier-Oblique</font></p>
+	<p>Bold/Italic:<br /><font size="5" face="Courier-BoldOblique">Courier-BoldOblique</font></p>
+</p>
+<p>Courier New</p>
+<p>
+	<p>Regular:<br /><font size="5" face="CourierNewPSMT">CourierNewPSMT</font></p>
+	<p>Bold:<br /><font size="5" face="CourierNewPS-BoldMT">CourierNewPS-BoldMT</font></p>
+	<p>Italic:<br /><font size="5" face="CourierNewPS-ItalicMT">CourierNewPS-ItalicMT</font></p>
+	<p>Bold/Italic:<br /><font size="5" face="CourierNewPS-BoldItalicMT">CourierNewPS-BoldItalicMT</font></p>
+</p>
+<p>Georgia</p>
+<p>
+	<p>Regular:<br /><font size="5" face="Georgia">Georgia</font></p>
+	<p>Bold:<br /><font size="5" face="Georgia-Bold">Georgia-Bold</font></p>
+	<p>Italic:<br /><font size="5" face="Georgia-Italic">Georgia-Italic</font></p>
+	<p>Bold/Italic:<br /><font size="5" face="Georgia-BoldItalic">Georgia-BoldItalic</font></p>
+</p>
+<p>Helvetica</p>
+<p>
+	<p>Regular:<br /><font size="5" face="Helvetica">Helvetica</font></p>
+	<p>Bold:<br /><font size="5" face="Helvetica-Bold">Helvetica-Bold</font></p>
+	<p>Italic:<br /><font size="5" face="Helvetica-Oblique">Helvetica-Oblique</font></p>
+	<p>Bold/Italic:<br /><font size="5" face="Helvetica-BoldOblique">Helvetica-BoldOblique</font></p>
+</p>
+<p>Helvetica Neue</p>
+<p>
+	<p>Regular:<br /><font size="5" face="HelveticaNeue" color="red">HelveticaNeue</font></p>
+	<p>Bold:<br /><font size="5" face="HelveticaNeue-Bold" color="green">HelveticaNeue-Bold</font></p>
+	<p>Italic:<br /><font size="5" face="HelveticaNeue-Italic" color="blue">HelveticaNeue-Italic</font></p>
+	<p>Bold/Italic:<br /><font size="5" face="HelveticaNeue-BoldItalic">HelveticaNeue-BoldItalic</font></p>
+</p>
+<p>Palatino</p>
+<p>
+	<p>Regular:<br /><font size="5" face="Palatino-Roman">Palatino-Roman</font></p>
+	<p>Bold:<br /><font size="5" face="Palatino-Bold">Palatino-Bold</font></p>
+	<p>Italic:<br /><font size="5" face="Palatino-Italic">Palatino-Italic</font></p>
+	<p>Bold/Italic:<br /><font size="5" face="Palatino-BoldItalic">Palatino-BoldItalic</font></p>
+</p>
+<p>Times New Roman</p>
+<p>
+	<p>Regular:<br /><font size="5" face="TimesNewRomanPSMT">TimesNewRomanPSMT</font></p>
+	<p>Bold:<br /><font size="5" face="TimesNewRomanPS-BoldMT">TimesNewRomanPS-BoldMT</font></p>
+	<p>Italic:<br /><font size="5" face="TimesNewRomanPS-ItalicMT">TimesNewRomanPS-ItalicMT</font></p>
+	<p>Bold/Italic:<br /><font size="5" face="TimesNewRomanPS-BoldItalicMT">TimesNewRomanPS-BoldItalicMT</font></p>
+</p>
+<p>Trebuchet MS</p>
+<p>
+	<p>Regular:<br /><font size="5" face="TrebuchetMS">TrebuchetMS</font></p>
+	<p>Bold:<br /><font size="5" face="TrebuchetMS-Bold">TrebuchetMS-Bold</font></p>
+	<p>Italic:<br /><font size="5" face="TrebuchetMS-Italic">TrebuchetMS-Italic</font></p>
+	<p>Bold/Italic:<br /><font size="5" face="Trebuchet-BoldItalic">Trebuchet-BoldItalic</font></p>
+</p>
+<p>Verdana</p>
+<p>
+	<p>Regular:<br /><font size="5" face="Verdana">Verdana</font></p>
+	<p>Bold:<br /><font size="5" face="Verdana-Bold">Verdana-Bold</font></p>
+	<p>Italic:<br /><font size="5" face="Verdana-Italic">Verdana-Italic</font></p>
+	<p>Bold/Italic:<br /><font size="5" face="Verdana-BoldItalic">Verdana-BoldItalic</font></p>
+</p>
+<p style="color:red">Custom Fonts</p>
+<p>Usage of custom fonts is supported. You have to register these in the info.plist.</p>
+<p>Note: For some fonts you might have to bundle the normal as well as the bold variant for CTFontDescriptor to find the normal font.</p>
+<p>Core Text automatically display Right-to-Left Text as such if only RTL characters are used
+<p>XB Niloofar:</p>
+<p dir="rtl" style="font-weight:normal;font-family:'XB Niloofar';font-size:24px">بِسْمِ اللّٰهِ</p>
+<p>American Typewriter:</p>
+<p style="font-family:'American Typewriter';font-size:20px">AmericanTypewriter</p>
+<p>American Typewriter Bold:</p>
+<p style="font-weight:bold;font-family:'American Typewriter';font-size:20px">AmericanTypewriter</p>
+
+<p style="color:red">Font Variants</p>
+<p>The font variant 'Small Caps' is supported by synthesizing an attributed string that has the lower case characters in the same font as the upper case ones, but 30% smaller.</p>
+<p>Helvetica (synthesized):<br/><p style="font-family:'Helvetica';font-size:30px;font-variant:small-caps">The Quick Brown <b>Fox</b> Jumps ...</p></p>
+<p>HoeflerText (native, iPad only):<br/><p style="font-family:'Hoefler Text';font-size:30px;font-variant:small-caps">The Quick Brown <b>Fox</b> Jumps ...</p></p><p>Supported values for the style font-variant:</p>
+<p><p>inherit</p><p>normal</p><p>small-caps</p></p>
+
+
+
+<p>anchor (a)</p>
+<p>
+
+The anchor (link) is supported with the following options:
+target="${reverb}|${web}". This specifies that the href is a valid reverb GUID, and the app should open inside the native application or in an external browser.
+</p>
+
+<p>Follow <a target="web" href="http://twitter.com/cocoanetics">@cocoanetics web target</a> on Twitter</p>
+<p>Follow <a target="reverb" href="http://twitter.com/cocoanetics">@cocoanetics reverb target</a> on Twitter</p>
+<p>Follow <a href="http://www.wordnik.com">wordnik</a> on Twitter</p>
+
+
+<p>entity</p>
+
+
+<p>
+Mandatory attributes
+
+guid="Some_unique_identifier_for_concept"
+</p>
+
+<p>This is a test of the entity tags <entity guid="DEADBEEF">this is an entity</entity> that was an entity</p>
+
+
+<p>img</p>
+
+<p>
+Mandatory values
+
+src="${image-url}"
+Images MUST specify a size in pixels for the client to render correctly
+
+width="${width}px"
+height="${height}px"
+</p>
+
+<p><img src="http://www.wordnik.com/images/homepage_logo.png" width="20" height="20"></p>
+<p><img src="http://www.wordnik.com/images/homepage_logo.png" width="100" height="100"></p>
+<p><img src="http://lovetomorrowtoday.com/wp-content/uploads/2009/02/colon-slash-slash1.jpg" width="200" height="200"></p>
+<p><img src="http://lovetomorrowtoday.com/wp-content/uploads/2009/02/colon-slash-slash1.jpg" width="300" height="300"></p>
+
+
+	
+<p><img src="http://ih0.redbubble.net/image.3936848.4984/flat,550x550,075,f.jpg#.png" width="300" height="300"></p>
+
+<p>Misc.</p>
+
+
+<p>linebreak</p>
+
+<p>The <br/>following <br/>tags <br/>are <br/>supported<br/> with<br/> the specified <br/>tag attributes.</p>
+
+<p>bold</p>
+
+<p>this has <b>bold</b> text </p>
+
+<p>italic</p>
+
+<p>this has <i>italic</i> text </p>
+
+<p>emphasis</p>
+
+<p>this has <em>emphasis</em> text </p>
+
+
+<p>underline</p>
+
+<p>this has <u>underline</u> text </p>
+
+
+
+
+
+
+<p>Sample Document</p>
+
+	(CNN) -- Anti-American rage sparked by an online film that insulted Islam's prophet boiled over Friday among Muslims in at least half a dozen countries, as the United States stepped up security at diplomatic posts across the Middle East.<br />
+		
+		One of the worst riots took place in <entity guid="Sudan">Sudan</entity>, where a thousands converged on the German Embassy and set it on fire, a journalist on the scene said.
+		
+		Some managed to get inside and pull down a German flag before police with tear gas forced the crowd to retreat.<br />
+		
+		In <entity guid="Egypt">Egypt</entity>, a running battle between police and protesters in <entity guid="Cairo">Cairo</entity> continued into its fourth day.
+		
+		And Afghanistan saw its first demonstrations Friday, despite the government's attempts to block the online video from sparking riots.<br />
+		
+		Aware that protests were planned for Friday -- the Muslim holy day -- the United States beefed up security at its embassies and consulates across the Middle East.<br />
+		
+		"We are in a full-court press at every single one of the posts in the Middle East and anywhere else there is any chance of demonstrations after Friday services to make sure nothing bad happens -- and to have the security in place in case bad things do happen," said a senior administration official, who was not authorized to discuss the issue in public and spoke on condition of anonymity.<br />
+		
+		The current unrest began Tuesday when outrage over
+		
+		<a href="http://www.cnn.com/2012/09/13/world/anti-islam-filmmaker/index.html" target="_blank">
+			
+			a 14-minute American-made online video that mocks the Prophet Mohammed
+			
+		</a>
+	
+	<p><img src="http://ih0.redbubble.net/image.3936848.4984/flat,550x550,075,f.jpg#.png" width="300" height="300"></p>
+
+		
+		as a womanizer, child molester and ruthless killer sparked riots at the U.S. Consulate in Benghazi,
+		
+		<entity guid="Libya">Libya</entity>.
+		
+		Four America consulate staffers were killed, including
+		
+		<a href="http://www.cnn.com/2012/09/12/world/africa/libya-us-ambassador-killed-profile/index.html" target="_blank">
+			
+			U.S. Ambassador Chris Stevens</a>
+		
+		.<br />
+		
+		U.S. officials suspect that a group sympathetic to al Qaeda used the protests over the film as cover for the complex and well-coordinated attack on the consulate.<br />
+		
+		Since then, there has been more outrage and violent protests over the online film, which YouTube has restricted in certain countries.<br />
+		
+		Here's a breakdown of where things stand:<br />
+		
+		<strong>Friday protests</strong><br />
+		
+		People have taken to the streets in more than half a dozen nations and territories to show their outrage about the film.<br />
+		
+		-- <entity guid="Egypt">Egypt's</entity> influential and well-organized Muslim Brotherhood canceled nationwide protests planned for Friday, it announced on Twitter, but said a demonstration planned for <entity guid="Cairo">Cairo</entity>'s Tahrir Square would go ahead.
+		
+		At least 15 people were injured in demonstrations in <entity guid="Egypt">Egypt</entity> on Friday, Health Ministry spokesman Mohamed Sultan said.<br />
+		
+		-- In Tunis, Tunisia, hundreds of protesters reached the gates of the U.S. Embassy despite police roadblocks leading up to the complex, an eyewitness said.
+		
+		Police fired tear gas on the crowd, but protesters climbed the gates waving black flags, the witness said.
+		
+		Some got into the grounds, lowered the American flag from its pole and raised a black flag its place, an eyewitness said.<br />
+		
+		-- In <entity guid="Sudan">Sudan's</entity> capital, Khartoum, some of the 10,000 protesters that rallied at the Germany Embassy managed to get inside and pull down a German flag before police with tear gas forced the crowds to retreat.
+		
+		The German mission is next to the British Embassy, which is also facing protests, staff there said.<br />
+		
+		-- In Afghanistan, hundreds of demonstrators in the eastern Nangarhar province burned a U.S. flag and chanted "Death to America" and "We condemn the film."
+		
+		The demonstration lasted about an hour and ended peacefully, a local official said.
+		
+		The Afghan government has ordered an indefinite block of YouTube to prevent people there from watching the clips and staging violent protests.<br />
+		
+		-- In <entity guid="Baghdad">Baghdad</entity>, <entity guid="Iraq">Iraq</entity>, hundreds of followers of the radical Shiite Muslim cleric Muqtada al-Sadr chanted "No to America, no to <entity guid="Israel">Israel</entity>."<br />
+		
+		-- In Jerusalem, Palestinians marched from the al-Aqsa mosque toward the U.S. Consulate, but were prevented from reaching the mission by Israeli riot forces.<br />
+		
+		<a href="http://religion.blogs.cnn.com/2012/09/14/jewish-groups-mad-about-initial-reports-on-anti-islam-film/" target="_blank">Jewish groups mad about over anti-Islam film</a><br />
+		
+		
+		<p><img src="http://ih0.redbubble.net/image.3936848.4984/flat,550x550,075,f.jpg#.png" width="300" height="300"></p>
+
+		-- In <entity guid="Syria">Syria</entity>, hundreds gathered outside the U.S. Embassy in <entity guid="Damascus">Damascus</entity>.
+		
+		Protesters waved placards that condemned the film and blamed the U.S. administration for allowing the production and broadcast of it, according to the state-run Syrian Arab News Agency.<br />
+		
+		-- In <entity guid="Iran">Iran</entity>, the Islamic Propagation Coordination Council called for nationwide rallies Friday to protest the film and what it is calling a U.S.-backed plot against Muslims, according to the state-run IRNA news agency.<br />
+		
+		The FBI and and the U.S. Department of Homeland Security warned of a risk of an increase in violence "at home and abroad as the film continues to gain attention."<br />
+		
+		The film that sparked the protests generated little interest when it was first posted in July on YouTube, but received global attention after it was aired recently on Egyptian television and promoted by anti-Islam activists online.<br />
+		
+		U.S. authorities have discounted as false a producer's claims to news outlets that the filmmaker was an Israeli who made the movie with financing from more than 100 Jewish donors.
+		
+		<entity guid="Israel">Israel's</entity> government denies that the film's maker is Israeli.<br />
+		
+		<a href="http://www.cnn.com/2012/09/13/world/anti-islam-filmmaker/index.html">New details emerge about mystery filmmaker</a><br />
+		
+		Latest on the investigation into ambassador's killing<br />
+		
+		Sources tracking militant Islamist groups in eastern <entity guid="Libya">Libya</entity> say the attack that killed Stevens and three other Americans was most likely carried out by a pro-al Qaeda group.
+		
+		President Barack Obama has vowed "justice will be done."<br />
+		
+		Four people have been arrested in connection with the attack, although they were not directly tied to the killings, said Monem Elyasser, the chief aide to the Libyan prime minister.<br />
+		
+		Elyasser did not release the identities nor did he detail the allegations against the four people in custody.<br />
+		
+		The evidence leading to the arrests was based partly on witnesses, but "mostly pictures that were taken around the compound at that time," Libyan Prime Minister Mustafa Abushagur told CNNI's Christiane Amanpour.<br />
+		
+		<a href="http://www.cnn.com/2012/09/13/world/arab-leaders-reactions/index.html" target="_blank">What Muslim nations' leaders are saying -- and not -- about embassy violence</a><br />
+		
+		The first of two U.S. warships carrying guided missiles has arrived off the coast of <entity guid="Libya">Libya</entity>, and unmanned drones have been sent to help search for the killers.<br />
+		
+		A group of Marines called a Fleet Antiterrorism Security Team was deployed to <entity guid="Libya">Libya</entity> to help secure U.S. facilities, said two U.S. officials, who spoke on condition of anonymity because they were not authorized to release the information.<br />
+		
+		About 50 Marines arrived in the country Wednesday, the officials said.<br />
+		
+		Have you witnessed the attacks?
+		
+		Share your images but stay safe.<br />
+</article>

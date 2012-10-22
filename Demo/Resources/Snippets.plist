@@ -10,6 +10,24 @@
 		<key>Title</key>
 		<string>READ ME</string>
 	</dict>
+
+	<dict>
+		<key>Description</key>
+		<string>Demonstrates content spec at https://github.com/reverb/specs/blob/master/content-spec.md.</string>
+		<key>File</key>
+		<string>spec.html</string>
+		<key>Title</key>
+		<string>content-spec.md</string>
+	</dict>
+	<dict>
+		<key>Description</key>
+		<string>Demonstrates MINIMAL content spec </string>
+		<key>File</key>
+		<string>spec2.html</string>
+		<key>Title</key>
+		<string>MINIMAL content-spec.md</string>
+	</dict>
+
 	<dict>
 		<key>Description</key>
 		<string>Demonstrates CSS styles that are supported so far.</string>
