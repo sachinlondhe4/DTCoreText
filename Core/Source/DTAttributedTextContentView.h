@@ -97,8 +97,9 @@
 
 @interface DTAttributedTextContentView : UIView 
 {
-	NSAttributedString *_attributedString;
+	NSMutableAttributedString *_attributedString;
 	DTCoreTextLayoutFrame *_layoutFrame;
+	NSRange _selectedRange;
 	
 	UIEdgeInsets _edgeInsets;
 	

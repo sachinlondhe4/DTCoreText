@@ -21,6 +21,44 @@
 #define SYNCHRONIZE_START(lock) /* NSLog(@"LOCK: FUNC=%s Line=%d", __func__, __LINE__), */dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);
 #define SYNCHRONIZE_END(lock) dispatch_semaphore_signal(lock) /*, NSLog(@"UN-LOCK")*/;
 
+
+@implementation  NSString (Searching)
+
+-(NSInteger)indexofBeginningOfWordAtIndex:(NSInteger)inIndex {
+	NSCharacterSet *charSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+	NSInteger index = inIndex;
+	
+	do {
+		unichar ch = [self characterAtIndex:index];
+		if (![charSet characterIsMember:ch]) {
+			index--;
+		} else {
+			break;
+		}
+	} while(index > 0);
+	return index;
+}
+
+
+-(NSInteger)indexofEndOfWordAtIndex:(NSInteger)inIndex {
+	NSCharacterSet *charSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+	NSInteger length = [self length];
+	NSInteger index = inIndex;
+
+	do {
+		unichar ch = [self characterAtIndex:index];
+		if (![charSet characterIsMember:ch]) {
+			index++;
+		} else {
+			break;
+		}
+	} while(index < length);
+	return index;
+}
+
+
+@end
+
 @interface DTAttributedTextContentView ()
 {
 	BOOL _drawDebugFrames;
@@ -87,6 +125,8 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 
 - (void)setup
 {
+	_selectedRange = NSMakeRange(0,0);
+	
 	self.contentMode = UIViewContentModeTopLeft; // to avoid bitmap scaling effect on resize
 	_shouldLayoutCustomSubviews = YES;
 	
@@ -562,7 +602,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 	if (_attributedString != string)
 	{
 		
-		_attributedString = [string copy];
+		_attributedString = [string mutableCopy];
 		
 		// new layout invalidates all positions for custom views
 		[self removeAllCustomViews];
@@ -640,7 +680,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 		{
 			if (_attributedString)
 			{
-				_layouter = [[DTCoreTextLayouter alloc] initWithAttributedString:_attributedString];
+				self.layouter = [[DTCoreTextLayouter alloc] initWithAttributedString:_attributedString];
 			}
 		}
 	}
@@ -651,14 +691,10 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 
 - (void)setLayouter:(DTCoreTextLayouter *)layouter
 {
-	SYNCHRONIZE_START(selfLock)
+	if (_layouter != layouter)
 	{
-		if (_layouter != layouter)
-		{
-			_layouter = layouter;
-		}
+		_layouter = layouter;
 	}
-	SYNCHRONIZE_END(selfLock)
 }
 
 - (DTCoreTextLayoutFrame *)layoutFrame
@@ -793,59 +829,81 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 
 #pragma mark Touches
 
+-(void)hideSelection
+{
+	if (_selectedRange.location == NSNotFound || _selectedRange.location > [_attributedString length] || _selectedRange.location + _selectedRange.length > [_attributedString length])
+		return;
+	
+	[_attributedString removeAttribute:DTBackgroundColorAttribute range:_selectedRange];
+	[self relayoutText];
+}
+
+-(void)showSelection
+{
+	if (_selectedRange.location == NSNotFound || _selectedRange.location > [_attributedString length] || _selectedRange.location + _selectedRange.length > [_attributedString length])
+		return;
+
+	DTColor *touchColor = [DTColor orangeColor];
+	[_attributedString addAttribute:DTBackgroundColorAttribute value:(id)[touchColor CGColor] range:_selectedRange];
+	[self relayoutText];
+
+}
+
+- (NSInteger)stringIndexForTouch:(UITouch *)touch {
+	CGPoint touchPoint = [touch locationInView:self];
+	CGRect rect = CGRectMake(touchPoint.x, touchPoint.y, 0.0, 0.0);
+	NSArray *lines = [self.layoutFrame linesVisibleInRect:rect];
+	DTCoreTextLayoutLine *line = [lines lastObject];
+	NSInteger index = [line stringIndexForPosition:touchPoint];
+	return index;
+}
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[super touchesBegan:touches withEvent:event];
+
+	
+	[self hideSelection];
+
 	UITouch *touch = [[touches allObjects] lastObject];
-	CGPoint touchPoint = [touch locationInView:self];
-	CGRect rect = CGRectMake(touchPoint.x, touchPoint.y, 0.0, 0.0);
-	NSArray *lines = [self.layoutFrame linesVisibleInRect:rect];
+	NSInteger index = [self stringIndexForTouch:touch];
+	NSInteger startOfWord = [[_attributedString string] indexofBeginningOfWordAtIndex:index];
+	NSInteger endOfWord = [[_attributedString string] indexofEndOfWordAtIndex:index];
+	NSRange wordRange = NSMakeRange(startOfWord, endOfWord - startOfWord);
+	_selectedRange = wordRange;
 	
-	
-	NSLog(@"touchesBegan %@", touch);
-	NSLog(@"lines %@", lines);
+	[self showSelection];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[super touchesMoved:touches withEvent:event];
-	NSLog(@"%@ touchesMoved %@", self, touches);
-
+	
+	[self hideSelection];
+	
+	UITouch *touch = [[touches allObjects] lastObject];
+	NSInteger index = [self stringIndexForTouch:touch];
+	NSInteger startOfWord = [[_attributedString string] indexofBeginningOfWordAtIndex:index];
+	NSInteger endOfWord = [[_attributedString string] indexofEndOfWordAtIndex:index];
+	NSRange wordRange = NSMakeRange(startOfWord, endOfWord - startOfWord);
+	_selectedRange = NSUnionRange(wordRange, _selectedRange);
+	
+	[self showSelection];
+	
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[super touchesEnded:touches withEvent:event];
-	NSLog(@"%@ touchesEnded %@", self, touches);
-
+//	[self hideSelection];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	[super touchesCancelled:touches withEvent:event];
-	NSLog(@"%@ touchesCancelled %@", self, touches);
-
+//	NSLog(@"%@ touchesCancelled %@", self, touches);
 }
-
-#pragma mark Motion
-
-
-- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
-{
-	NSLog(@"%@ motionBegan %d", self, motion);
-}
-
-- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
-{
-	NSLog(@"%@ motionEnded %d", self, motion);
-}
-
-- (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event
-{
-	NSLog(@"%@ motionCancelled %d", self, motion);
-}
-
 
 
 @synthesize layouter = _layouter;
