@@ -169,9 +169,9 @@ static NSCache *_imageCache = nil;
 {
 //	NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSValue valueWithCGSize:CGSizeMake(_fullWidth, _fullHeight)], @"ImageSize", _url, @"ImageURL", nil];
 	
-	if ([self.delegate respondsToSelector:@selector(lazyImageView:didChangeImageSize:)]) {
-		[self.delegate lazyImageView:self didChangeImageSize:CGSizeMake(_fullWidth, _fullHeight)];
-	}
+//	if ([self.delegate respondsToSelector:@selector(lazyImageView:didChangeImageSize:)]) {
+//		[self.delegate lazyImageView:self didChangeImageSize:CGSizeMake(_fullWidth, _fullHeight)];
+//	}
 //	[[NSNotificationCenter defaultCenter] postNotificationName:@"DTLazyImageViewDidFinishLoading" object:nil userInfo:userInfo];
 }
 

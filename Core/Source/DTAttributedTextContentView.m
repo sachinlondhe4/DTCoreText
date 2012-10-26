@@ -859,39 +859,39 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 }
 
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	[super touchesBegan:touches withEvent:event];
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+//{
+//	[super touchesBegan:touches withEvent:event];
+//
+//	
+//	[self hideSelection];
+//
+//	UITouch *touch = [[touches allObjects] lastObject];
+//	NSInteger index = [self stringIndexForTouch:touch];
+//	NSInteger startOfWord = [[_attributedString string] indexofBeginningOfWordAtIndex:index];
+//	NSInteger endOfWord = [[_attributedString string] indexofEndOfWordAtIndex:index];
+//	NSRange wordRange = NSMakeRange(startOfWord, endOfWord - startOfWord);
+//	_selectedRange = wordRange;
+//	
+//	[self showSelection];
+//}
 
-	
-	[self hideSelection];
-
-	UITouch *touch = [[touches allObjects] lastObject];
-	NSInteger index = [self stringIndexForTouch:touch];
-	NSInteger startOfWord = [[_attributedString string] indexofBeginningOfWordAtIndex:index];
-	NSInteger endOfWord = [[_attributedString string] indexofEndOfWordAtIndex:index];
-	NSRange wordRange = NSMakeRange(startOfWord, endOfWord - startOfWord);
-	_selectedRange = wordRange;
-	
-	[self showSelection];
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	[super touchesMoved:touches withEvent:event];
-	
-	[self hideSelection];
-	
-	UITouch *touch = [[touches allObjects] lastObject];
-	NSInteger index = [self stringIndexForTouch:touch];
-	NSInteger startOfWord = [[_attributedString string] indexofBeginningOfWordAtIndex:index];
-	NSInteger endOfWord = [[_attributedString string] indexofEndOfWordAtIndex:index];
-	NSRange wordRange = NSMakeRange(startOfWord, endOfWord - startOfWord);
-	_selectedRange = NSUnionRange(wordRange, _selectedRange);
-	
-	[self showSelection];
-	
-}
+//- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+//{
+//	[super touchesMoved:touches withEvent:event];
+//	
+//	[self hideSelection];
+//	
+//	UITouch *touch = [[touches allObjects] lastObject];
+//	NSInteger index = [self stringIndexForTouch:touch];
+//	NSInteger startOfWord = [[_attributedString string] indexofBeginningOfWordAtIndex:index];
+//	NSInteger endOfWord = [[_attributedString string] indexofEndOfWordAtIndex:index];
+//	NSRange wordRange = NSMakeRange(startOfWord, endOfWord - startOfWord);
+//	_selectedRange = NSUnionRange(wordRange, _selectedRange);
+//	
+//	[self showSelection];
+//	
+//}
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {

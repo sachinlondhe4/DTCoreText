@@ -322,7 +322,10 @@
 		}
 		
 		// add it to output
-		[tmpString appendAttributedString:[currentTag attributedString]];	
+		[tmpString appendString:@"\n"];
+		[tmpString appendAttributedString:[currentTag attributedString]];
+		[tmpString appendString:@"\n"];
+		
 		outputHasNewline = NO;
 		currentTagIsEmpty = NO;
 	};
@@ -434,14 +437,9 @@
 	
 	void (^entityBlock)(void) = ^
 	{
-		NSLog(@"currentTag.attributes %@", currentTag.attributes);
 		NSString *guid = [currentTag attributeForKey:@"guid"];
 		currentTag.linkGUID = guid;
 		currentTag.underlineStyle = kCTUnderlinePatternDot | kCTUnderlineStyleDouble;
-
-	//	currentTag.textColor = [DTColor orangeColor];
-	//	currentTag.backgroundColor = [DTColor orangeColor];
-		
 		currentTag.isColorInherited = NO;
 	};
 	

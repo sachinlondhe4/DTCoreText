@@ -544,7 +544,7 @@ static BOOL _DTCoreTextLayoutFramesShouldDrawDebugFrames = NO;
 
 - (void)_buildLines
 {
-	SYNCHRONIZE_START(_selfLock)
+//	SYNCHRONIZE_START(_selfLock)
 	{
 		// only build lines if frame is legal
 		if (_frame.size.width<=0)
@@ -557,7 +557,7 @@ static BOOL _DTCoreTextLayoutFramesShouldDrawDebugFrames = NO;
 		
 		//[self _buildLinesWithStandardFramesetter];
 	}
-	SYNCHRONIZE_END(_selfLock)
+//	SYNCHRONIZE_END(_selfLock)
 
 }
 
