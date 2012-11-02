@@ -28,6 +28,10 @@ extern NSString * const DTDefaultListIndent;
 extern NSString * const DTDefaultStyleSheet;
 extern NSString * const DTWillFlushBlockCallBack;
 
+extern NSString * const DTShowImages;
+extern NSString * const DTShowLinks;
+extern NSString * const DTShowEntities;
+
 // attributed string attribute constants
 
 extern NSString * const DTTextListsAttribute;

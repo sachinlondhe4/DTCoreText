@@ -276,58 +276,60 @@
 	
 	void (^imgBlock)(void) = ^ 
 	{
-		// float causes the image to be its own block
-		if (currentTag.floatStyle != DTHTMLElementFloatStyleNone)
-		{
-			currentTag.displayStyle = DTHTMLElementDisplayStyleBlock;
-		}
 		
-		// hide contents of recognized tag
-		currentTag.tagContentInvisible = YES;
-		
-		// make appropriate attachment
-		DTTextAttachment *attachment = [DTTextAttachment textAttachmentWithElement:currentTag options:_options];
-		
-		// add it to tag
-		currentTag.textAttachment = attachment;
-		
-		// to avoid much too much space before the image
-		currentTag.paragraphStyle.lineHeightMultiple = 1;
-		
-		// specifiying line height interfers with correct positioning
-		currentTag.paragraphStyle.minimumLineHeight = 0;
-		currentTag.paragraphStyle.maximumLineHeight = 0;
-		
-		// caller gets opportunity to modify image tag before it is written
-		if (_willFlushCallback)
-		{
-			_willFlushCallback(currentTag);
-		}
-		
-		// maybe the image is forced to show as block, then we want a newline before and after
-		if (currentTag.displayStyle == DTHTMLElementDisplayStyleBlock)
-		{
-			needsNewLineBefore = YES;
-		}
-		
-		if (needsNewLineBefore)
-		{
-			if ([tmpString length] && !outputHasNewline)
+		if ([[_options objectForKey:DTShowImages] boolValue]) {
+			
+			// float causes the image to be its own block
+			if (currentTag.floatStyle != DTHTMLElementFloatStyleNone)
 			{
-				[tmpString appendNakedString:@"\n"];
-				outputHasNewline = YES;
+				currentTag.displayStyle = DTHTMLElementDisplayStyleBlock;
 			}
 			
-			needsNewLineBefore = NO;
+			// hide contents of recognized tag
+			currentTag.tagContentInvisible = YES;
+			
+			// make appropriate attachment
+			DTTextAttachment *attachment = [DTTextAttachment textAttachmentWithElement:currentTag options:_options];
+			
+			// add it to tag
+			currentTag.textAttachment = attachment;
+			
+			// to avoid much too much space before the image
+			currentTag.paragraphStyle.lineHeightMultiple = 1;
+			
+			// specifiying line height interfers with correct positioning
+			currentTag.paragraphStyle.minimumLineHeight = 0;
+			currentTag.paragraphStyle.maximumLineHeight = 0;
+			
+			// caller gets opportunity to modify image tag before it is written
+			if (_willFlushCallback)
+			{
+				_willFlushCallback(currentTag);
+			}
+			
+			// maybe the image is forced to show as block, then we want a newline before and after
+			if (currentTag.displayStyle == DTHTMLElementDisplayStyleBlock)
+			{
+				needsNewLineBefore = YES;
+			}
+			
+			if (needsNewLineBefore)
+			{
+				if ([tmpString length] && !outputHasNewline)
+				{
+					[tmpString appendNakedString:@"\n"];
+					outputHasNewline = YES;
+				}
+				
+				needsNewLineBefore = NO;
+			}
+			
+			// add it to output
+			[tmpString appendAttributedString:[currentTag attributedString]];
+			
+			outputHasNewline = NO;
+			currentTagIsEmpty = NO;
 		}
-		
-		// add it to output
-		[tmpString appendString:@"\n"];
-		[tmpString appendAttributedString:[currentTag attributedString]];
-		[tmpString appendString:@"\n"];
-		
-		outputHasNewline = NO;
-		currentTagIsEmpty = NO;
 	};
 	
 	[_tagStartHandlers setObject:[imgBlock copy] forKey:@"img"];
@@ -393,54 +395,59 @@
 	
 	void (^aBlock)(void) = ^ 
 	{
-		if (currentTag.isColorInherited || !currentTag.textColor)
-		{
-			currentTag.textColor = defaultLinkColor;
-			currentTag.isColorInherited = NO;
-		}
 		
-		// remove line breaks and whitespace in links
-		NSString *cleanString = [[currentTag attributeForKey:@"href"] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-		cleanString = [cleanString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-		
-		NSURL *link = [NSURL URLWithString:cleanString];
-		
-		// deal with relative URL
-		if (![link scheme])
-		{
-			if ([cleanString length])
+		if ([[_options objectForKey:DTShowLinks] boolValue]) {
+
+			if (currentTag.isColorInherited || !currentTag.textColor)
 			{
-				link = [NSURL URLWithString:cleanString relativeToURL:baseURL];
-				
-				if (!link)
+				currentTag.textColor = defaultLinkColor;
+				currentTag.isColorInherited = NO;
+			}
+			
+			// remove line breaks and whitespace in links
+			NSString *cleanString = [[currentTag attributeForKey:@"href"] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+			cleanString = [cleanString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+			
+			NSURL *link = [NSURL URLWithString:cleanString];
+			
+			// deal with relative URL
+			if (![link scheme])
+			{
+				if ([cleanString length])
 				{
-					// NSURL did not like the link, so let's encode it
-					cleanString = [cleanString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-					
 					link = [NSURL URLWithString:cleanString relativeToURL:baseURL];
+					
+					if (!link)
+					{
+						// NSURL did not like the link, so let's encode it
+						cleanString = [cleanString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+						
+						link = [NSURL URLWithString:cleanString relativeToURL:baseURL];
+					}
+				}
+				else
+				{
+					link = baseURL;
 				}
 			}
-			else
-			{
-				link = baseURL;
-			}
+			
+
+			currentTag.link = link;
+			// the name attribute of A becomes an anchor
+			currentTag.anchorName = [currentTag attributeForKey:@"name"];
 		}
-		
-		currentTag.link = link;
-		
-		
-		// the name attribute of A becomes an anchor
-		currentTag.anchorName = [currentTag attributeForKey:@"name"];
 	};
 	
 	[_tagStartHandlers setObject:[aBlock copy] forKey:@"a"];
 	
 	void (^entityBlock)(void) = ^
 	{
-		NSString *guid = [currentTag attributeForKey:@"guid"];
-		currentTag.linkGUID = guid;
-		currentTag.underlineStyle = kCTUnderlinePatternDot | kCTUnderlineStyleDouble;
-		currentTag.isColorInherited = NO;
+		if ([[_options objectForKey:DTShowEntities] boolValue]) {
+			NSString *guid = [currentTag attributeForKey:@"guid"];
+			currentTag.linkGUID = guid;
+			currentTag.underlineStyle = kCTUnderlinePatternDot | kCTUnderlineStyleDouble;
+			currentTag.isColorInherited = NO;
+		}
 	};
 	
 	[_tagStartHandlers setObject:[entityBlock copy] forKey:@"entity"];
@@ -966,11 +973,14 @@
 			nextTag.backgroundColor = currentTag.backgroundColor;
 		}
 		
-		// apply style from merged style sheet
-		NSDictionary *mergedStyles = [_globalStyleSheet mergedStyleDictionaryForElement:nextTag];
-		if (mergedStyles)
-		{
-			[nextTag applyStyleDictionary:mergedStyles];
+		BOOL shouldMergeStyes = ![nextTag.tagName isEqualToString:@"a"] || [[_options objectForKey:DTShowLinks] boolValue];
+		if (shouldMergeStyes) {
+			// apply style from merged style sheet
+			NSDictionary *mergedStyles = [_globalStyleSheet mergedStyleDictionaryForElement:nextTag];
+			if (mergedStyles)
+			{
+				[nextTag applyStyleDictionary:mergedStyles];
+			}
 		}
 		
 		BOOL removeUnflushedWhitespace = NO;

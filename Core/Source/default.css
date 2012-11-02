@@ -18,6 +18,16 @@ head
 	display:none;
 }
 
+img
+{
+	text-align:center;
+ 	display:block;
+	-webkit-margin-before:20;
+	-webkit-margin-after:20;
+	-webkit-margin-start:100;
+	-webkit-margin-end:100;
+}
+
 title
 {
 	display:none;
@@ -28,10 +38,16 @@ style
 	display:none;
 }
 
-body 
+body
 {
 	/* safari has a 8 px margin here */
 	display:block;
+	
+	margin:20;
+    padding:20;
+	
+	text-align:justify;
+
 }
 
 article,aside,footer,header,hgroup,nav,section
@@ -44,8 +60,8 @@ p
 	display:block;
 	-webkit-margin-before:1em;
 	-webkit-margin-after:1em;
-	-webkit-margin-start:0;
-	-webkit-margin-end:0;
+	-webkit-margin-start:20;
+	-webkit-margin-end:20;
 }
 
 ul,menu,dir

@@ -24,6 +24,10 @@ NSString * const DTDefaultListIndent = @"DTDefaultListIndent";
 NSString * const DTDefaultStyleSheet = @"DTDefaultStyleSheet";
 NSString * const DTWillFlushBlockCallBack = @"DTWillFlushBlockCallBack";
 
+NSString * const DTShowImages = @"DTShowImages";
+NSString * const DTShowLinks = @"DTShowLinks";
+NSString * const DTShowEntities = @"DTShowEntities";
+
 // attributed string attribute constants
 
 NSString * const DTTextListsAttribute = @"DTTextLists";

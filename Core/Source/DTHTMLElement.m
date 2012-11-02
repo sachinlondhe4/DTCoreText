@@ -578,9 +578,14 @@
 	else
 	{
 		NSString *webkitMarginAfter = [styles objectForKey:@"-webkit-margin-after"];
-		if (webkitMarginAfter) 
+		if (webkitMarginAfter)
 		{
 			self.paragraphStyle.paragraphSpacing = [webkitMarginAfter pixelSizeOfCSSMeasureRelativeToCurrentTextSize:fontDescriptor.pointSize];
+		}
+		NSString *webkitMarginBefore = [styles objectForKey:@"-webkit-margin-before"];
+		if (webkitMarginBefore)
+		{
+			self.paragraphStyle.paragraphSpacingBefore = [webkitMarginBefore pixelSizeOfCSSMeasureRelativeToCurrentTextSize:fontDescriptor.pointSize];
 		}
 	}
 	NSString *fontVariantStr = [[styles objectForKey:@"font-variant"] lowercaseString];
