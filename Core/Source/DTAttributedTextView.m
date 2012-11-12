@@ -253,7 +253,8 @@
 	return contentView.delegate;
 }
 
-//@synthesize attributedString;
+
+@synthesize attributedString;
 @synthesize contentView;
 @synthesize textDelegate;
 

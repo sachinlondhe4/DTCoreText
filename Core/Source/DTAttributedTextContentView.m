@@ -196,10 +196,16 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 	[self removeAllCustomViews];
 	
 	dispatch_release(selfLock);
+#ifdef DEBUG
+	NSLog(@"%@ dealloc", self);
+#endif
 }
 
 - (void)layoutSubviewsInRect:(CGRect)rect
 {
+//	// make sure we have this around
+//	self.layouter;
+	
 	// if we are called for partial (non-infinate) we remove unneeded custom subviews first
 	if (!CGRectIsInfinite(rect))
 	{
@@ -211,7 +217,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 	
 	DTCoreTextLayoutFrame *theLayoutFrame = self.layoutFrame;
 	
-	SYNCHRONIZE_START(selfLock)
+//	SYNCHRONIZE_START(selfLock)
 	{
 		NSAttributedString *layoutString = [theLayoutFrame attributedStringFragment];
 		NSArray *lines;
@@ -408,7 +414,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 		
 		[CATransaction commit];
 	}
-	SYNCHRONIZE_END(selfLock)
+//	SYNCHRONIZE_END(selfLock)
 }
 
 - (void)layoutSubviews

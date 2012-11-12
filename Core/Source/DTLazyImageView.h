@@ -20,10 +20,7 @@
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, strong) NSMutableURLRequest *urlRequest;
 @property (nonatomic, assign) BOOL shouldShowProgressiveDownload;
-
-@property (nonatomic, strong) id<DTLazyImageViewDelegate> delegate;	// subtle simulator bug - use assign not __unsafe_unretained
-// RVBArticleReaderViewController can be dealloced by the time this is accessed in notify
-
+@property (nonatomic, unsafe_unretained) id<DTLazyImageViewDelegate> delegate;
 - (void)cancelLoading;
 
 @end

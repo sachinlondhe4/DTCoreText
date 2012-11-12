@@ -82,9 +82,7 @@ static NSCache *_imageCache = nil;
 			self.image = image;
 			_fullWidth = image.size.width;
 			_fullHeight = image.size.height;
-			
-			// for unknown reasons direct notify does not work below iOS 5
-			[self performSelector:@selector(notify) withObject:nil afterDelay:0.0];
+			[self notify];
 			return;
 		} else {
 			[self loadImageAtURL:_url];

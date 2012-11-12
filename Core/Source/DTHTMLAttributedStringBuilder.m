@@ -452,7 +452,14 @@
 	
 	[_tagStartHandlers setObject:[entityBlock copy] forKey:@"entity"];
 
+	void (^articleBlock)(void) = ^
+	{
+		// special handling?
+	};
 	
+	[_tagStartHandlers setObject:[articleBlock copy] forKey:@"article"];
+	
+
 	
 	void (^liBlock)(void) = ^ 
 	{
