@@ -116,7 +116,7 @@ static BOOL _DTCoreTextLayoutFramesShouldDrawDebugFrames = NO;
 	}
 	SYNCHRONIZE_END(_selfLock)
 	
-	dispatch_release(_selfLock);
+//	dispatch_release(_selfLock);
 
 
 }

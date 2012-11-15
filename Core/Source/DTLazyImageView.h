@@ -20,7 +20,7 @@
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, strong) NSMutableURLRequest *urlRequest;
 @property (nonatomic, assign) BOOL shouldShowProgressiveDownload;
-@property (nonatomic, unsafe_unretained) id<DTLazyImageViewDelegate> delegate;
+@property (nonatomic, weak) id<DTLazyImageViewDelegate> delegate;
 - (void)cancelLoading;
 
 @end

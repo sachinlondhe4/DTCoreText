@@ -133,7 +133,7 @@
 
 @property (nonatomic, assign) IBOutlet id <DTAttributedTextContentViewDelegate> delegate;	// subtle simulator bug - use assign not __unsafe_unretained
 
-@property (nonatomic, assign) dispatch_semaphore_t selfLock;
+@property (nonatomic, strong) dispatch_semaphore_t selfLock;
 
 
 @end

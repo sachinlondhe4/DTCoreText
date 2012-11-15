@@ -77,10 +77,10 @@
 
 - (void)dealloc 
 {
-	dispatch_release(_stringAssemblyQueue);
-	dispatch_release(_stringAssemblyGroup);
-	dispatch_release(_stringParsingQueue);
-	dispatch_release(_stringParsingGroup);
+//	dispatch_release(_stringAssemblyQueue);
+//	dispatch_release(_stringAssemblyGroup);
+//	dispatch_release(_stringParsingQueue);
+//	dispatch_release(_stringParsingGroup);
 }
 
 - (BOOL)_buildString

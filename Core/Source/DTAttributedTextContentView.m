@@ -195,7 +195,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 {
 	[self removeAllCustomViews];
 	
-	dispatch_release(selfLock);
+//	dispatch_release(selfLock);
 #ifdef DEBUG
 	NSLog(@"%@ dealloc", self);
 #endif

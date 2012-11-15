@@ -53,7 +53,7 @@
 	[self discardFramesetter];
 	SYNCHRONIZE_END(self)
 
-	dispatch_release(selfLock);
+//	dispatch_release(selfLock);
 }
 
 - (NSString *)description
