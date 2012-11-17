@@ -445,7 +445,7 @@
 		if ([[_options objectForKey:DTShowEntities] boolValue]) {
 			NSString *guid = [currentTag attributeForKey:@"guid"];
 			currentTag.linkGUID = guid;
-			currentTag.underlineStyle = kCTUnderlinePatternDot | kCTUnderlineStyleDouble;
+			currentTag.backgroundColor = [UIColor colorWithHexString:@"F7ECB9"];
 			currentTag.isColorInherited = NO;
 		}
 	};
