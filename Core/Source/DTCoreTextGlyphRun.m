@@ -94,7 +94,7 @@
 - (void)calculateMetrics
 {
 	// calculate metrics
-	SYNCHRONIZE_START(self)
+//	SYNCHRONIZE_START(self)
 	{
 		if (!_didCalculateMetrics)
 		{
@@ -102,7 +102,7 @@
 			_didCalculateMetrics = YES;
 		}
 	}
-	SYNCHRONIZE_END(self)
+//	SYNCHRONIZE_END(self)
 }
 
 - (CGRect)frameOfGlyphAtIndex:(NSInteger)index
