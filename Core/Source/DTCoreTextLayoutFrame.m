@@ -102,7 +102,7 @@ static BOOL _DTCoreTextLayoutFramesShouldDrawDebugFrames = NO;
 - (void)dealloc
 {
 	
-	SYNCHRONIZE_START(_selfLock)	// just to be sure
+//	SYNCHRONIZE_START(_selfLock)	// just to be sure
 		
 
 	if (_textFrame)
@@ -114,7 +114,7 @@ static BOOL _DTCoreTextLayoutFramesShouldDrawDebugFrames = NO;
 	{
 		CFRelease(_framesetter);
 	}
-	SYNCHRONIZE_END(_selfLock)
+//	SYNCHRONIZE_END(_selfLock)
 	
 //	dispatch_release(_selfLock);
 
