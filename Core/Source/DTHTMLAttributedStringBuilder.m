@@ -91,6 +91,9 @@
 		return NO;
 	}
 	
+	
+	
+	
 	// register default handlers
 	[self _registerTagStartHandlers];
 	[self _registerTagEndHandlers];
@@ -455,6 +458,9 @@
 	void (^articleBlock)(void) = ^
 	{
 		// special handling?
+		
+		
+		
 	};
 	
 	[_tagStartHandlers setObject:[articleBlock copy] forKey:@"article"];
@@ -668,6 +674,12 @@
 				break;
 		}
 		
+		// Non-standard size in points
+		NSString *pointSize = [currentTag attributeForKey:@"pointsize"];
+		if(pointSize) {
+			currentTag.fontDescriptor.pointSize = textScale * [pointSize intValue];
+		}
+		
 		NSString *face = [currentTag attributeForKey:@"face"];
 		
 		if (face)
@@ -684,6 +696,16 @@
 		{
 			currentTag.textColor = [DTColor colorWithHTMLName:color];       
 		}
+		
+		// Non-standard color in hex
+
+		NSString *hexColor = [currentTag attributeForKey:@"hexcolor"];
+		
+		if (hexColor)
+		{
+			currentTag.textColor = [DTColor colorWithHexString:hexColor];
+		}
+
 	};
 	
 	[_tagStartHandlers setObject:[fontBlock copy] forKey:@"font"];
