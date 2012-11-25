@@ -49,9 +49,9 @@
 
 - (void)dealloc
 {
-	SYNCHRONIZE_START(self)	// just to be sure
+//	SYNCHRONIZE_START(self)	// just to be sure
 	[self discardFramesetter];
-	SYNCHRONIZE_END(self)
+//	SYNCHRONIZE_END(self)
 
 //	dispatch_release(selfLock);
 }
