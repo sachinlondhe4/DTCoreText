@@ -47,7 +47,7 @@ static BOOL _DTCoreTextLayoutFramesShouldDrawDebugFrames = NO;
 	self = [super init];
 	if (self)
 	{
-		_selfLock = dispatch_semaphore_create(1);
+//		_selfLock = dispatch_semaphore_create(1);
 
 		_frame = frame;
 		
@@ -76,6 +76,48 @@ static BOOL _DTCoreTextLayoutFramesShouldDrawDebugFrames = NO;
 			
 			CGMutablePathRef path = CGPathCreateMutable();
 			CGPathAddRect(path, NULL, frame);
+			
+			/*
+			 
+			 Lots of crashes here...
+
+			 
+			 (lldb) bt
+			 * thread #1: tid = 0x1c03, 0x026e7254 libsystem_sim_c.dylib`bzero$VARIANT$sse42 + 84, stop reason = EXC_BAD_ACCESS (code=2, address=0x1)
+			 frame #0: 0x026e7254 libsystem_sim_c.dylib`bzero$VARIANT$sse42 + 84
+			 frame #1: 0x0191698a CoreText`-[_CTNativeGlyphStorage prepareWithCapacity:preallocated:] + 84
+			 frame #2: 0x01916a6e CoreText`+[_CTNativeGlyphStorage newWithCount:] + 114
+			 frame #3: 0x01916bfa CoreText`-[_CTNativeGlyphStorage copyWithRange:] + 61
+			 frame #4: 0x0191aa24 CoreText`TStorageRange::DetachStorage() + 60
+			 frame #5: 0x018f6cfc CoreText`TLine::DetachRun(long) + 64
+			 frame #6: 0x018f609b CoreText`TLine::DetachRuns() + 141
+			 frame #7: 0x018f5faa CoreText`TLine::UpdateWidth() + 20
+			 frame #8: 0x018f0387 CoreText`TTypesetter::FindGraphicalBreak(long, double, double, unsigned char ()(long) block_pointer) const + 239
+			 frame #9: 0x018fb27f CoreText`TFramesetter::FrameInRect(TFrame&, CFRange) const + 1197
+			 frame #10: 0x018fada4 CoreText`TFramesetter::CreateFrame(CFRange, CGPath const*, __CFDictionary const*) const + 164
+			 frame #11: 0x018fa706 CoreText`CTFramesetterCreateFrame + 127
+			 frame #12: 0x0008e1b1 Whetstone`-[DTCoreTextLayoutFrame initWithFrame:layouter:range:] + 785 at DTCoreTextLayoutFrame.m:80
+			 frame #13: 0x0008d892 Whetstone`-[DTCoreTextLayouter layoutFrameWithRect:range:] + 162 at DTCoreTextLayouter.m:89
+			 frame #14: 0x00084176 Whetstone`-[DTAttributedTextContentView layoutFrame] + 534 at DTAttributedTextContentView.m:724
+			 frame #15: 0x00081d8f Whetstone`-[DTAttributedTextContentView sizeThatFits:] + 223 at DTAttributedTextContentView.m:478
+			 frame #16: 0x00082b0e Whetstone`-[DTAttributedTextContentView relayoutText] + 414 at DTAttributedTextContentView.m:537
+			 frame #17: 0x0000d588 Whetstone`-[RVBArticleReaderViewController lazyImageView:didChangeImageSize:] + 1144 at RVBArticleReaderViewController.m:508
+			 frame #18: 0x000a8ca8 Whetstone`-[DTLazyImageView notify] + 504 at DTLazyImageView.m:171
+			 frame #19: 0x000a8f39 Whetstone`-[DTLazyImageView completeDownloadWithData:] + 441 at DTLazyImageView.m:186
+			 frame #20: 0x020446b0 libobjc.A.dylib`-[NSObject performSelector:withObject:] + 70
+			 frame #21: 0x01549035 Foundation`__NSThreadPerformPerform + 327
+			 frame #22: 0x02afdf3f CoreFoundation`__CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 15
+			 frame #23: 0x02afd96f CoreFoundation`__CFRunLoopDoSources0 + 239
+			 frame #24: 0x02b20734 CoreFoundation`__CFRunLoopRun + 964
+			 frame #25: 0x02b1ff44 CoreFoundation`CFRunLoopRunSpecific + 276
+			 frame #26: 0x02b1fe1b CoreFoundation`CFRunLoopRunInMode + 123
+			 frame #27: 0x02f0d7e3 GraphicsServices`GSEventRunModal + 88
+			 frame #28: 0x02f0d668 GraphicsServices`GSEventRun + 104
+			 frame #29: 0x0093b65c UIKit`UIApplicationMain + 1211
+			 frame #30: 0x00002d2d Whetstone`main + 141 at main.m:16
+			 
+			 */
+			
 			
 			_textFrame = CTFramesetterCreateFrame(_framesetter, cfRange, path, NULL);
 			

@@ -559,6 +559,13 @@
 			remoteGlobalIDString = A70B4CE61486637E00873A4A;
 			remoteInfo = "Static Library";
 		};
+		E2E04E931662C24500C9BA15 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7E383AB160DFEA700CF72D6 /* DTFoundation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A7787A0D16441B1800AF5830;
+			remoteInfo = DTBonjour;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -1125,7 +1132,7 @@
 				A7E383EB160DFFDE00CF72D6 /* libDTZipArchive.a */,
 				A7E38402160E007A00CF72D6 /* libDTDownloadCache.a */,
 				A7335CCA1616DA8300482C19 /* PDFDemo.app */,
-				008A8AB51667DA60001D5000 /* libDTBonjour.a */,
+				E2E04E941662C24500C9BA15 /* libDTBonjour.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1500,6 +1507,13 @@
 			fileType = archive.ar;
 			path = libDTDownloadCache.a;
 			remoteRef = A7E38401160E007A00CF72D6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E2E04E941662C24500C9BA15 /* libDTBonjour.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDTBonjour.a;
+			remoteRef = E2E04E931662C24500C9BA15 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
