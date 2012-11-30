@@ -15,14 +15,14 @@
 	#define __IPHONE_4_3 40300
 #endif
 
-#define SYNCHRONIZE_START(obj) dispatch_semaphore_wait(runLock, DISPATCH_TIME_FOREVER);
-#define SYNCHRONIZE_END(obj) dispatch_semaphore_signal(runLock);
+//#define SYNCHRONIZE_START(obj) dispatch_semaphore_wait(runLock, DISPATCH_TIME_FOREVER);
+//#define SYNCHRONIZE_END(obj) dispatch_semaphore_signal(runLock);
 
 @interface DTCoreTextGlyphRun ()
 @property (nonatomic, assign) CGRect frame;
 @property (nonatomic, assign) NSInteger numberOfGlyphs;
 @property (nonatomic, unsafe_unretained, readwrite) NSDictionary *attributes;
-@property (nonatomic, assign) dispatch_semaphore_t runLock;
+//@property (nonatomic, assign) dispatch_semaphore_t runLock;
 
 @end
 
@@ -56,7 +56,7 @@
 	BOOL _didCalculateMetrics;
 }
 
-@synthesize runLock;
+//@synthesize runLock;
 
 - (id)initWithRun:(CTRunRef)run layoutLine:(DTCoreTextLayoutLine *)layoutLine offset:(CGFloat)offset
 {
@@ -69,7 +69,7 @@
 		
 		_offset = offset;
 		_line = layoutLine;
-		runLock = dispatch_semaphore_create(1);
+//		runLock = dispatch_semaphore_create(1);
 	}
 	
 	return self;

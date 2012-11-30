@@ -450,7 +450,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 	DTCoreTextLayoutFrame *theLayoutFrame = self.layoutFrame;
 	
 	// need to prevent updating of string and drawing at the same time
-	SYNCHRONIZE_START(selfLock)
+//	SYNCHRONIZE_START(selfLock)
 	{
 		[theLayoutFrame drawInContext:ctx drawImages:_shouldDrawImages drawLinks:_shouldDrawLinks];
 		
@@ -459,7 +459,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 			[_delegate attributedTextContentView:self didDrawLayoutFrame:theLayoutFrame inContext:ctx];
 		}
 	}
-	SYNCHRONIZE_END(selfLock)
+//	SYNCHRONIZE_END(selfLock)
 }
 
 - (void)drawRect:(CGRect)rect
@@ -680,7 +680,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 
 - (DTCoreTextLayouter *)layouter
 {
-	SYNCHRONIZE_START(selfLock)
+//	SYNCHRONIZE_START(selfLock)
 	{
 		if (!_layouter)
 		{
@@ -690,7 +690,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 			}
 		}
 	}
-	SYNCHRONIZE_END(selfLock)
+//	SYNCHRONIZE_END(selfLock)
 	
 	return _layouter;
 }
@@ -710,7 +710,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 	if (!_layoutFrame)
 	{
 		// prevent unnecessary locking if we don't need to create new layout frame
-		SYNCHRONIZE_START(selfLock)
+//		SYNCHRONIZE_START(selfLock)
 		{
 			// Test again - small window where another thread could have been setting this value
 			if (!_layoutFrame)
@@ -740,7 +740,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 				}
 			}
 		}
-		SYNCHRONIZE_END(selfLock)
+//		SYNCHRONIZE_END(selfLock)
 	}
 	
 	return _layoutFrame;
@@ -748,7 +748,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 
 - (void)setLayoutFrame:(DTCoreTextLayoutFrame *)layoutFrame
 {
-	SYNCHRONIZE_START(selfLock)
+//	SYNCHRONIZE_START(selfLock)
 	{
 		if (_layoutFrame != layoutFrame)
 		{
@@ -762,7 +762,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 			_layoutFrame = layoutFrame;
 		}
 	}
-	SYNCHRONIZE_END(selfLock)
+//	SYNCHRONIZE_END(selfLock)
 }
 
 - (NSMutableSet *)customViews
@@ -823,15 +823,15 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 }
 
 
-- (dispatch_semaphore_t)selfLock
-{
-	if (!selfLock)
-	{
-		selfLock = dispatch_semaphore_create(1);
-	}
-	
-	return selfLock;
-}
+//- (dispatch_semaphore_t)selfLock
+//{
+//	if (!selfLock)
+//	{
+//		selfLock = dispatch_semaphore_create(1);
+//	}
+//	
+//	return selfLock;
+//}
 
 #pragma mark Touches
 

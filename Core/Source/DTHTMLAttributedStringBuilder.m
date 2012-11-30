@@ -821,7 +821,8 @@
 			// empty paragraph
 			
 			// end of P we always add a newline
-			[tmpString appendString:@"\n" withParagraphStyle:currentTag.paragraphStyle fontDescriptor:currentTag.fontDescriptor];
+			// TRN - No don't!
+			// [tmpString appendString:@"EOL\n" withParagraphStyle:currentTag.paragraphStyle fontDescriptor:currentTag.fontDescriptor];
 		}
 		else
 		{
@@ -836,7 +837,7 @@
 
 - (void)_handleTagContent:(NSString *)string
 {
-	NSAssert(dispatch_get_current_queue() == _stringAssemblyQueue, @"method called from invalid queue");
+//	NSAssert(dispatch_get_current_queue() == _stringAssemblyQueue, @"method called from invalid queue");
 	
 	if (!_currentTagContents)
 	{
@@ -897,7 +898,7 @@
 
 - (void)_flushCurrentTagContent:(NSString *)tagContent normalizeWhitespace:(BOOL)normalizeWhitespace
 {
-	NSAssert(dispatch_get_current_queue() == _stringAssemblyQueue, @"method called from invalid queue");
+//	NSAssert(dispatch_get_current_queue() == _stringAssemblyQueue, @"method called from invalid queue");
 	
 	// trim newlines
 	NSString *tagContents = tagContent;

@@ -11,15 +11,15 @@
 @interface DTCoreTextLayouter ()
 
 @property (nonatomic, strong) NSMutableArray *frames;
-@property (nonatomic, assign) dispatch_semaphore_t selfLock;
+//@property (nonatomic, assign) dispatch_semaphore_t selfLock;
 
 - (CTFramesetterRef)framesetter;
 - (void)discardFramesetter;
 
 @end
 
-#define SYNCHRONIZE_START(obj) dispatch_semaphore_wait(selfLock, DISPATCH_TIME_FOREVER);
-#define SYNCHRONIZE_END(obj) dispatch_semaphore_signal(selfLock);
+//#define SYNCHRONIZE_START(obj) dispatch_semaphore_wait(selfLock, DISPATCH_TIME_FOREVER);
+//#define SYNCHRONIZE_END(obj) dispatch_semaphore_signal(selfLock);
 
 @implementation DTCoreTextLayouter
 {
@@ -29,7 +29,7 @@
 	
 	NSMutableArray *frames;
 }
-@synthesize selfLock;
+//@synthesize selfLock;
 
 - (id)initWithAttributedString:(NSAttributedString *)attributedString
 {
@@ -40,7 +40,7 @@
 			return nil;
 		}
 		
-		selfLock = dispatch_semaphore_create(1);
+	//	selfLock = dispatch_semaphore_create(1);
 		self.attributedString = attributedString;
 	}
 	
@@ -109,14 +109,14 @@
 {
 	if (!framesetter) // Race condition, could be null now but set when we get into the SYNCHRONIZE block - so do the test twice
 	{
-		SYNCHRONIZE_START(self)
+	//	SYNCHRONIZE_START(self)
 		{
 			if (!framesetter)
 			{
 				framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)self.attributedString);
 			}
 		}
-		SYNCHRONIZE_END(self)
+	//	SYNCHRONIZE_END(self)
 	}
 	return framesetter;
 }
@@ -136,7 +136,7 @@
 
 - (void)setAttributedString:(NSAttributedString *)attributedString
 {
-	SYNCHRONIZE_START(self)
+	//SYNCHRONIZE_START(self)
 	{
 		if (_attributedString != attributedString)
 		{
@@ -145,7 +145,7 @@
 			[self discardFramesetter];
 		}
 	}
-	SYNCHRONIZE_END(self)
+	//SYNCHRONIZE_END(self)
 }
 
 - (NSAttributedString *)attributedString

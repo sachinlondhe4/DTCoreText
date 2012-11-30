@@ -14,15 +14,15 @@
 static BOOL _DTCoreTextLayoutFramesShouldDrawDebugFrames = NO;
 
 
-#define SYNCHRONIZE_START(lock) /* NSLog(@"LOCK: FUNC=%s Line=%d", __func__, __LINE__), */dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);
-#define SYNCHRONIZE_END(lock) dispatch_semaphore_signal(lock) /*, NSLog(@"UN-LOCK")*/;
+//#define SYNCHRONIZE_START(lock) /* NSLog(@"LOCK: FUNC=%s Line=%d", __func__, __LINE__), */dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);
+//#define SYNCHRONIZE_END(lock) dispatch_semaphore_signal(lock) /*, NSLog(@"UN-LOCK")*/;
 
 // two correction methods used by the deprecated way of layouting to work around Core Text bugs
 @interface DTCoreTextLayoutFrame ()
 
 - (void)_correctAttachmentHeights;
 - (void)_correctLineOrigins;
-@property (nonatomic, assign) dispatch_semaphore_t selfLock;
+//@property (nonatomic, assign) dispatch_semaphore_t selfLock;
 
 
 @end
