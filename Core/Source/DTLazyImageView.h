@@ -22,5 +22,6 @@
 @property (nonatomic, assign) BOOL shouldShowProgressiveDownload;
 @property (nonatomic, weak) id<DTLazyImageViewDelegate> delegate;
 - (void)cancelLoading;
+- (void)loadImageAtURL:(NSURL *)url;
 
 @end

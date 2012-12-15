@@ -175,6 +175,9 @@ static NSCache *_imageCache = nil;
 
 - (void)completeDownloadWithData:(NSData *)data
 {
+	// make sure this is on the main thread
+	NSAssert([NSThread isMainThread], @"completeDownloadWithData not called on main thread!");
+
 	UIImage *image = [[UIImage alloc] initWithData:data];
 	
 	self.image = image;
