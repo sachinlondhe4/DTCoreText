@@ -448,7 +448,8 @@
 		if ([[_options objectForKey:DTShowEntities] boolValue]) {
 			NSString *guid = [currentTag attributeForKey:@"guid"];
 			currentTag.linkGUID = guid;
-			currentTag.backgroundColor = [UIColor colorWithHexString:@"F7ECB9"];
+			currentTag.backgroundColor = [UIColor colorWithHexString:@"FFFFCD"]; // 46
+			currentTag.textColor = [UIColor colorWithHexString:@"000000"];
 			currentTag.isColorInherited = NO;
 		}
 	};
