@@ -476,6 +476,7 @@ static Class _layerClassToUseForDTAttributedTextContentView = nil;
 	}
 	
 	CGSize neededSize = CGSizeMake(size.width, CGRectGetMaxY(self.layoutFrame.frame) + _edgeInsets.bottom);
+	neededSize.height += 316.0;
 	
 	return neededSize;
 }
