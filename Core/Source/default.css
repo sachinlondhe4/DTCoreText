@@ -18,17 +18,6 @@ head
 	display:none;
 }
 
-
-img
-{
-	text-align:left;
- 	display:block;
-	-webkit-margin-before:20;
-	-webkit-margin-after:20;
-	-webkit-margin-start:100;
-	-webkit-margin-end:100;
-}
-
 title
 {
 	display:none;
@@ -39,14 +28,10 @@ style
 	display:none;
 }
 
-body
+body 
 {
 	/* safari has a 8 px margin here */
 	display:block;
-	
-	margin:20;
-    padding:40;
-
 }
 
 article,aside,footer,header,hgroup,nav,section
@@ -57,10 +42,10 @@ article,aside,footer,header,hgroup,nav,section
 p
 {
 	display:block;
-	-webkit-margin-before:5;
-	-webkit-margin-after:5;
-	-webkit-margin-start:20;
-	-webkit-margin-end:20;
+	-webkit-margin-before:1em;
+	-webkit-margin-after:1em;
+	-webkit-margin-start:0;
+	-webkit-margin-end:0;
 }
 
 ul,menu,dir
@@ -105,9 +90,12 @@ code
 	font-family:Courier;
 }
 
-pre
+pre, xmp, plaintext, listing 
 {
-	font-family:Courier;
+	display: block;
+	font-family: monospace;
+	white-space: pre;
+	margin: 1em 0px;
 }
 
 /* color:-webkit-link */

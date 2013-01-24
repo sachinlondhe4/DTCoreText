@@ -35,13 +35,15 @@
 
 @property (nonatomic, assign, readonly) CGRect frame;
 @property (nonatomic, assign, readonly) NSInteger numberOfGlyphs;
-@property (nonatomic, assign, readonly) NSDictionary *attributes;	// subtle simulator bug - use assign not __unsafe_unretained in 4.2
+@property (nonatomic, unsafe_unretained, readonly) NSDictionary *attributes;	// subtle simulator bug - use assign not __unsafe_unretained in 4.2
 @property (nonatomic, assign, readonly, getter=isHyperlink) BOOL hyperlink;
 
 @property (nonatomic, assign, readonly) CGFloat ascent;
 @property (nonatomic, assign, readonly) CGFloat descent;
 @property (nonatomic, assign, readonly) CGFloat leading;
 @property (nonatomic, assign, readonly) CGFloat width;
+
+@property (nonatomic, assign, readonly) BOOL writingDirectionIsRightToLeft;
 
 @property (nonatomic, strong) DTTextAttachment *attachment;
 

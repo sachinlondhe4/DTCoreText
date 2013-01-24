@@ -32,6 +32,7 @@ static NSCache *_imageCache = nil;
     
     BOOL shouldShowProgressiveDownload;
 	
+	__unsafe_unretained id<DTLazyImageViewDelegate> _delegate;
 }
 @synthesize delegate=_delegate;
 
@@ -44,7 +45,6 @@ static NSCache *_imageCache = nil;
 
 - (void)loadImageAtURL:(NSURL *)url
 {
-	self.shouldShowProgressiveDownload = YES;
 	if ([NSThread isMainThread])
 	{
 		[self performSelectorInBackground:@selector(loadImageAtURL:) withObject:url];
@@ -82,12 +82,14 @@ static NSCache *_imageCache = nil;
 			self.image = image;
 			_fullWidth = image.size.width;
 			_fullHeight = image.size.height;
-			[self notify];
+			
+			// for unknown reasons direct notify does not work below iOS 5
+			[self performSelector:@selector(notify) withObject:nil afterDelay:0.0];
 			return;
-		} else {
-			[self loadImageAtURL:_url];
 		}
-	}
+		
+		[self loadImageAtURL:_url];
+	}	
 }
 
 - (void)cancelLoading
@@ -165,19 +167,16 @@ static NSCache *_imageCache = nil;
 
 - (void)notify
 {
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSValue valueWithCGSize:CGSizeMake(_fullWidth, _fullHeight)], @"ImageSize", _url, @"ImageURL", nil];
+//	NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSValue valueWithCGSize:CGSizeMake(_fullWidth, _fullHeight)], @"ImageSize", _url, @"ImageURL", nil];
 	
 	if ([self.delegate respondsToSelector:@selector(lazyImageView:didChangeImageSize:)]) {
 		[self.delegate lazyImageView:self didChangeImageSize:CGSizeMake(_fullWidth, _fullHeight)];
 	}
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"DTLazyImageViewDidFinishLoading" object:nil userInfo:userInfo];
+//	[[NSNotificationCenter defaultCenter] postNotificationName:@"DTLazyImageViewDidFinishLoading" object:nil userInfo:userInfo];
 }
 
 - (void)completeDownloadWithData:(NSData *)data
 {
-	// make sure this is on the main thread
-	NSAssert([NSThread isMainThread], @"completeDownloadWithData not called on main thread!");
-
 	UIImage *image = [[UIImage alloc] initWithData:data];
 	
 	self.image = image;

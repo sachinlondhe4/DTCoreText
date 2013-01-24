@@ -20,8 +20,9 @@
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, strong) NSMutableURLRequest *urlRequest;
 @property (nonatomic, assign) BOOL shouldShowProgressiveDownload;
-@property (nonatomic, weak) id<DTLazyImageViewDelegate> delegate;
+
+@property (nonatomic, assign) id<DTLazyImageViewDelegate> delegate;	// subtle simulator bug - use assign not __unsafe_unretained
+
 - (void)cancelLoading;
-- (void)loadImageAtURL:(NSURL *)url;
 
 @end

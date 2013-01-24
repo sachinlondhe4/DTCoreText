@@ -97,13 +97,14 @@
 
 @interface DTAttributedTextContentView : UIView 
 {
-	NSMutableAttributedString *_attributedString;
+	NSAttributedString *_attributedString;
 	DTCoreTextLayoutFrame *_layoutFrame;
-	NSRange _selectedRange;
 	
 	UIEdgeInsets _edgeInsets;
 	
 	NSMutableDictionary *customViewsForAttachmentsIndex;
+
+	BOOL _flexibleHeight;
 }
 
 - (id)initWithAttributedString:(NSAttributedString *)attributedString width:(CGFloat)width;
@@ -124,7 +125,6 @@
 
 @property (nonatomic, copy) NSAttributedString *attributedString;
 @property (nonatomic) UIEdgeInsets edgeInsets;
-@property (nonatomic) BOOL drawDebugFrames;
 @property (nonatomic) BOOL shouldDrawImages;
 @property (nonatomic) BOOL shouldDrawLinks;
 @property (nonatomic) BOOL shouldLayoutCustomSubviews;
@@ -133,7 +133,11 @@
 
 @property (nonatomic, assign) IBOutlet id <DTAttributedTextContentViewDelegate> delegate;	// subtle simulator bug - use assign not __unsafe_unretained
 
-@property (nonatomic, strong) dispatch_semaphore_t selfLock;
+#if OS_OBJECT_USE_OBJC
+@property (nonatomic, strong) dispatch_semaphore_t selfLock;  // GCD objects use ARC
+#else
+@property (nonatomic, assign) dispatch_semaphore_t selfLock;  // GCD objects don't use ARC
+#endif
 
 
 @end

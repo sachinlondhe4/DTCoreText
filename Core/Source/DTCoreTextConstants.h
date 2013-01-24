@@ -2,6 +2,7 @@
 
 #define UNICODE_OBJECT_PLACEHOLDER @"\ufffc"
 #define UNICODE_LINE_FEED @"\u2028"
+#define UNICODE_NON_BREAKING_SPACE @"\u00a0"
 
 // standard options
 
@@ -26,11 +27,8 @@ extern NSString * const DTDefaultFirstLineHeadIndent;
 extern NSString * const DTDefaultHeadIndent;
 extern NSString * const DTDefaultListIndent;
 extern NSString * const DTDefaultStyleSheet;
+extern NSString * const DTUseiOS6Attributes;
 extern NSString * const DTWillFlushBlockCallBack;
-
-extern NSString * const DTShowImages;
-extern NSString * const DTShowLinks;
-extern NSString * const DTShowEntities;
 
 // attributed string attribute constants
 
@@ -48,6 +46,34 @@ extern NSString * const DTHorizontalRuleStyleAttribute;
 extern NSString * const DTTextBlocksAttribute;
 extern NSString * const DTFieldAttribute;
 
+// iOS 6 compatibility
+extern BOOL ___useiOS6Attributes;
+
 // macros
 
 #define IS_WHITESPACE(_c) (_c == ' ' || _c == '\t' || _c == 0xA || _c == 0xB || _c == 0xC || _c == 0xD || _c == 0x85)
+
+// types
+
+typedef enum
+{
+	DTHTMLElementDisplayStyleInline = 0, // default
+	DTHTMLElementDisplayStyleNone,
+	DTHTMLElementDisplayStyleBlock,
+	DTHTMLElementDisplayStyleListItem,
+	DTHTMLElementDisplayStyleTable,
+} DTHTMLElementDisplayStyle;
+
+typedef enum
+{
+	DTHTMLElementFloatStyleNone = 0,
+	DTHTMLElementFloatStyleLeft,
+	DTHTMLElementFloatStyleRight
+} DTHTMLElementFloatStyle;
+
+typedef enum
+{
+	DTHTMLElementFontVariantInherit = 0,
+	DTHTMLElementFontVariantNormal,
+	DTHTMLElementFontVariantSmallCaps
+} DTHTMLElementFontVariant;

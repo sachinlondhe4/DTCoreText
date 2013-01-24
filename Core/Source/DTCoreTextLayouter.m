@@ -11,25 +11,30 @@
 @interface DTCoreTextLayouter ()
 
 @property (nonatomic, strong) NSMutableArray *frames;
-//@property (nonatomic, assign) dispatch_semaphore_t selfLock;
+
+#if OS_OBJECT_USE_OBJC
+@property (nonatomic, strong) dispatch_semaphore_t selfLock;  // GCD objects use ARC
+#else
+@property (nonatomic, assign) dispatch_semaphore_t selfLock;  // GCD objects don't use ARC
+#endif
 
 - (CTFramesetterRef)framesetter;
 - (void)discardFramesetter;
 
 @end
 
-//#define SYNCHRONIZE_START(obj) dispatch_semaphore_wait(selfLock, DISPATCH_TIME_FOREVER);
-//#define SYNCHRONIZE_END(obj) dispatch_semaphore_signal(selfLock);
+#define SYNCHRONIZE_START(obj) dispatch_semaphore_wait(selfLock, DISPATCH_TIME_FOREVER);
+#define SYNCHRONIZE_END(obj) dispatch_semaphore_signal(selfLock);
 
 @implementation DTCoreTextLayouter
 {
-	CTFramesetterRef framesetter;
+	CTFramesetterRef _framesetter;
 	
 	NSAttributedString *_attributedString;
 	
 	NSMutableArray *frames;
 }
-//@synthesize selfLock;
+@synthesize selfLock;
 
 - (id)initWithAttributedString:(NSAttributedString *)attributedString
 {
@@ -40,7 +45,7 @@
 			return nil;
 		}
 		
-	//	selfLock = dispatch_semaphore_create(1);
+		selfLock = dispatch_semaphore_create(1);
 		self.attributedString = attributedString;
 	}
 	
@@ -49,11 +54,13 @@
 
 - (void)dealloc
 {
-//	SYNCHRONIZE_START(self)	// just to be sure
+	SYNCHRONIZE_START(self)	// just to be sure
 	[self discardFramesetter];
-//	SYNCHRONIZE_END(self)
+	SYNCHRONIZE_END(self)
 
-//	dispatch_release(selfLock);
+#if !OS_OBJECT_USE_OBJC
+	dispatch_release(selfLock);
+#endif
 }
 
 - (NSString *)description
@@ -107,18 +114,18 @@
 #pragma mark Properties
 - (CTFramesetterRef)framesetter
 {
-	if (!framesetter) // Race condition, could be null now but set when we get into the SYNCHRONIZE block - so do the test twice
+	if (!_framesetter) // Race condition, could be null now but set when we get into the SYNCHRONIZE block - so do the test twice
 	{
-	//	SYNCHRONIZE_START(self)
+		SYNCHRONIZE_START(self)
 		{
-			if (!framesetter)
+			if (!_framesetter)
 			{
-				framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)self.attributedString);
+				_framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)self.attributedString);
 			}
 		}
-	//	SYNCHRONIZE_END(self)
+		SYNCHRONIZE_END(self)
 	}
-	return framesetter;
+	return _framesetter;
 }
 
 
@@ -126,17 +133,17 @@
 {
 	{
 		// framesetter needs to go
-		if (framesetter)
+		if (_framesetter)
 		{
-			CFRelease(framesetter);
-			framesetter = NULL;
+			CFRelease(_framesetter);
+			_framesetter = NULL;
 		}
 	}
 }
 
 - (void)setAttributedString:(NSAttributedString *)attributedString
 {
-	//SYNCHRONIZE_START(self)
+	SYNCHRONIZE_START(self)
 	{
 		if (_attributedString != attributedString)
 		{
@@ -145,7 +152,7 @@
 			[self discardFramesetter];
 		}
 	}
-	//SYNCHRONIZE_END(self)
+	SYNCHRONIZE_END(self)
 }
 
 - (NSAttributedString *)attributedString
@@ -166,7 +173,7 @@
 
 
 @synthesize attributedString = _attributedString;
-@synthesize frames;
-@synthesize framesetter;
+@synthesize frames = _frames;
+@synthesize framesetter = _framesetter;
 
 @end
